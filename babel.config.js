@@ -1,17 +1,12 @@
 module.exports = {
-  env: {
-    build: {
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            modules: false,
-            loose: true
-          }
-        ]
-      ]
-    }
-  },
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        modules: false
+      }
+    ]
+  ],
   plugins: [
     // "@babel/plugin-transform-async-to-generator",
     // "@babel/plugin-external-helpers",
