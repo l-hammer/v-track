@@ -2,12 +2,20 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-07 22:12:07
+ * @Last Modified time: 2019-04-07 23:59:07
  */
 import VisMonitor from "./utils/vis-monitor";
 
 let curPage = null; // 保存当前页name
-const MODIFIERS = ["async", "shadow", "delay", "watch", "scroll"]; // 修饰符
+const MODIFIERS = [
+  "async",
+  "shadow",
+  "delay",
+  "watch",
+  "show",
+  "once",
+  "custom"
+]; // 修饰符
 const isProd = process.env.NODE_ENV === "production";
 const isUndef = v => v === undefined || v === null;
 const isDef = v => v !== undefined && v !== null;
@@ -171,7 +179,7 @@ function bind(
     });
   }
   // 区域曝光埋点
-  else if (partialMatch("scroll")) {
+  else if (partialMatch("show")) {
     const fn = () => events[id](context);
     const once = partialMatch("once");
     const custom = partialMatch("custom");
