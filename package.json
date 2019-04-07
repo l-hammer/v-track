@@ -1,31 +1,41 @@
 {
   "name": "vue-track",
   "version": "0.1.0",
+  "description": "一个基于Vue指令的埋点插件",
+  "main": "dist/vue-track.min.js",
+  "module": "dist/vue-track.esm.js",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:doc": "vue-cli-service build",
-    "build:": "rollup --config build/rollup.config.js && npm run size",
-    "build": "cross-env BABEL_ENV=build node build && npm run size",
+    "build": "npm run build:es && npm run build:browser",
+    "build:es": "rollup --config build/rollup.config.es.js",
+    "build:browser": "rollup --config build/rollup.config.browser.js && npm run size",
+    "prepublishOnly": "npm run build",
     "size": "gzip-size dist/vue-track.min.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
-  "dependencies": {
-    "vue": "^2.6.6"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l-hammer/vue-track.git"
   },
+  "keywords": [
+    "vue",
+    "track",
+    "directive",
+    "plugin"
+  ],
+  "author": "LHammer <lhammer@qq.com>",
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
-    "@babel/node": "^7.2.2",
     "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-async-to-generator": "^7.4.0",
     "@babel/plugin-transform-modules-commonjs": "^7.4.3",
-    "@babel/plugin-transform-regenerator": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-plugin-unit-jest": "^3.5.0",
@@ -34,12 +44,9 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
-    "cross-env": "^5.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "gzip-size-cli": "^3.0.0",
-    "nodemon": "^1.18.10",
-    "regenerator-runtime": "^0.13.2",
     "rollup": "^1.9.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
