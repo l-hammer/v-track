@@ -4,7 +4,6 @@
   "description": "一个基于Vue指令的埋点插件",
   "main": "dist/vue-track.min.js",
   "module": "dist/vue-track.esm.js",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run build:es && npm run build:browser",
