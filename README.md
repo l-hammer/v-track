@@ -1,4 +1,4 @@
-# vue-track
+# v-track
 
 ## Project setup
 ```

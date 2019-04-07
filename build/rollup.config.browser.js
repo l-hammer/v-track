@@ -3,8 +3,8 @@ import { uglify } from "rollup-plugin-uglify";
 
 const config = Object.assign({}, base, {
   output: {
-    name: "vue-track",
-    file: "dist/vue-track.min.js",
+    name: "v-track",
+    file: "dist/v-track.min.js",
     format: "umd"
   }
 });
