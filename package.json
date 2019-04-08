@@ -20,9 +20,11 @@
   },
   "keywords": [
     "vue",
+    "javascript",
     "track",
     "directive",
-    "plugin"
+    "plugin",
+    "vue-components"
   ],
   "author": "LHammer <lhammer@qq.com>",
   "license": "MIT",
