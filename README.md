@@ -38,15 +38,15 @@ Vue.use(VTrack, {
 - `.async` 表示异步事件行为的埋点
 - `.delay` 表示埋点是否延迟执行，默认先执行埋点再执行回调
 - `.show` 表示区域曝光埋点
-- `.show.once` 表示区域曝光埋点，只执行一次
-- `.show.custom` 表示区域曝光埋点，`custom`表示使用自定义scroll事件
+- `.once` 配合`.show`指令，只执行一次埋点
+- `.custom` 配合`.show`指令，表示使用自定义scroll事件
 
 ## 示例
 
 ```js
-// client/src/tracks/track-events.js
+/* track-events.js */
 export default {
-  // UP、PV埋点
+  /* UP、PV埋点 */
   UVPV() {
     ...
   },
