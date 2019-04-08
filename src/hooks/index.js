@@ -2,17 +2,17 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 12:14:41
+ * @Last Modified time: 2019-04-08 12:22:34
  */
 import {
   isProd,
   isFun,
-  isVisible,
   zipArray,
   exactlySameVnode,
   _exactMatch,
   _partialMatch
 } from "../utils/helper";
+import { isVisible } from "../utils/dom";
 import VisMonitor from "../utils/vis-monitor";
 
 const MODIFIERS = ["async", "delay", "watch", "show", "once", "custom"]; // 修饰符
