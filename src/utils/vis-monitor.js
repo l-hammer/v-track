@@ -1,79 +1,17 @@
-// 是否为一个 DOM 元素
-const isElement = ele => ele && ele.nodeType === 1;
-const isFun = v => typeof v === "function" || false;
-
-/**
- * @desc 元素是否在可视区域可见
- *
- * @param {Object} rect 元素大小及相对可视区域的位置信息
- * @returns {Boolean} true => 可见 false => 不可见
+/*
+ * @Author: 宋慧武
+ * @Date: 2019-04-08 11:13:34
+ * @Last Modified by: 宋慧武
+ * @Last Modified time: 2019-04-08 12:00:05
  */
-function isInViewport(rect, viewport) {
-  if (!rect || (rect.width <= 0 || rect.height <= 0)) {
-    return false;
-  }
-  return (
-    rect.bottom > 0 &&
-    rect.right > 0 &&
-    rect.top < viewport.height &&
-    rect.left < viewport.width
-  );
-}
+import { isElement, isVisible, isInViewport } from "./dom";
+import { isFun, debounce } from "./helper";
 
 /**
- * @desc 获取 DOM CSS 属性的值
+ * @class
+ * @name VisMonitor
  *
- * @param {DOMElement} ele A DOM 元素
- * @returns {*}
- */
-function getStylePropValue(ele, prop) {
-  return window.getComputedStyle(ele).getPropertyValue(prop);
-}
-
-/**
- * @desc 元素是否隐藏
- *
- * @param {DOMElement} ele A DOM 元素
- * @returns {Boolean} true => 未隐藏可见  false => 隐藏不可见
- */
-function isVisible(ele) {
-  if (ele === window.document) {
-    return true;
-  }
-  if (!ele || !ele.parentNode) {
-    return false;
-  }
-
-  const parent = ele.parentNode;
-  const visibility = getStylePropValue(ele, "visibility");
-  const display = getStylePropValue(ele, "display");
-
-  if (visibility === "hidden" || display === "none") {
-    return false;
-  }
-  return parent ? isVisible(parent) : true;
-}
-
-/**
- * @desc 防抖函数，至少间隔200毫秒执行一次
- *
- * @param {*} fn
- * @param {number} [ms=200]
- * @returns
- */
-function debounce(fn, ms = 200) {
-  let timeoutId;
-  return function(...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
-  };
-}
-
-/**
- * @desc 获取目标元素可见区域百分比
- *
- * @param {DOMElement} ele A DOM 元素
- * @returns {Bumber} 0.8
+ * @deec 目标元素控制器
  */
 export default class VisMonitor {
   constructor(ele, ref) {
@@ -156,6 +94,9 @@ export default class VisMonitor {
     return this;
   }
 
+  /**
+   * 计算元素可见比例，如果比例为100%，则触发 fullyvisible 事件
+   */
   visibilitychange() {
     const rect = this.ele.getBoundingClientRect();
     const view = {
@@ -185,6 +126,9 @@ export default class VisMonitor {
     if (perc === 1) this.$emit("fullyvisible");
   }
 
+  /**
+   * 销毁当前实例的事件
+   */
   destroy() {
     isFun(this.removeScrollLisener) && this.removeScrollLisener();
   }

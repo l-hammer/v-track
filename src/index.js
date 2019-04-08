@@ -2,70 +2,20 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 10:55:26
+ * @Last Modified time: 2019-04-08 12:02:20
  */
+import {
+  isProd,
+  isFun,
+  isVisible,
+  zipArray,
+  exactlySameVnode,
+  _exactMatch,
+  _partialMatch
+} from "./helper";
 import VisMonitor from "./utils/vis-monitor";
 
-let curPage = null; // 保存当前页name
 const MODIFIERS = ["async", "delay", "watch", "show", "once", "custom"]; // 修饰符
-const isProd = process.env.NODE_ENV === "production";
-const isUndef = v => v === undefined || v === null;
-const isDef = v => v !== undefined && v !== null;
-const isFun = v => typeof v === "function" || false;
-const sameVnode = (
-  a,
-  b // 是否为同一个vnode节点
-) =>
-  a.key === b.key &&
-  a.tag === b.tag &&
-  a.isComment === b.isComment &&
-  isDef(a.data) === isDef(b.data);
-
-/**
- * 获取对象的键值
- * @param {*} value
- * @returns [keys, values]
- */
-function zipArray(value) {
-  return [Object.values(value), Object.keys(value)];
-}
-
-/**
- * 查找满足filter的父辈元素
- * @param {Object} 选择表达式 {display: none}
- */
-function parentsUntil(el, filter) {
-  const rest = [];
-
-  el = el.parentElement;
-  while (el) {
-    if (!filter) {
-      rest.push(el);
-    } else {
-      el.style.display === filter.display && rest.push(el);
-    }
-    el = el.parentElement;
-  }
-  return rest;
-}
-
-/**
- * @description 完全匹配指定修饰符
- */
-function _exactMatch(mdfs, vals) {
-  const keys = Object.keys(mdfs);
-
-  return keys.length === vals.length && vals.every(v => keys.includes(v));
-}
-
-/**
- * @description 完全匹配指定修饰符
- */
-function _partialMatch(mdfs, vals) {
-  const keys = Object.keys(mdfs);
-
-  return vals.some(v => keys.includes(v));
-}
 
 /*******************************************************************************
  * @description 监听数据发生改变时触发埋点，需处理两种情况：
@@ -151,20 +101,14 @@ function bind(
       events[id](context);
     }, value);
   } else if (exactMatch("watch", "delay")) {
-    /**
-     * @description 异步 + 指定延长时间埋点（多适用页面停留时长埋点）
-     * @method parentsUntil 判断元素是否被隐藏（页面），隐藏则清除定时器
-     */
     const exp = [...Object.keys(value)].pop();
 
     tck = () => {
       el.$timer && clearTimeout(el.$timer);
       el.$timer = setTimeout(() => {
-        const isVisible = parentsUntil(context.$el, {
-          display: "none"
-        }).length;
+        const visible = isVisible(context.$el);
 
-        !isVisible && events[id](context);
+        !visible && events[id](context);
       }, value.delay);
     };
     watcher(exp, tck, {
@@ -270,29 +214,6 @@ function bind(
   }
 }
 
-// vnode节点是否完全相等
-function exactlySameVnode(vnode, oldVnode) {
-  if (!sameVnode(vnode, oldVnode)) return false;
-
-  const oldCh = oldVnode.children;
-  const ch = vnode.children;
-
-  // vnode为非文本节点，且新旧节点的子节点都存在但不相同
-  if (isUndef(vnode.text) && isDef(oldCh) && isDef(ch)) {
-    if (oldCh.length !== ch.length) return false;
-    for (let i = 0; i < ch.length; i++) {
-      const c = ch[i];
-
-      if (isDef(c) && isDef(oldCh[i])) {
-        return exactlySameVnode(c, oldCh[i]);
-      }
-    }
-  }
-  // vnode为文本节点，新旧节点内容不相同
-  else if (vnode.text !== oldVnode.text) return false;
-  return true;
-}
-
 /**
  * @description 由于 DOM 更新采用 diff 算法更新，如果新旧节点相同，则 el 会全等，导致 bind 绑定无法更
  * 新，出现事件绑定诡异的问题，但由于 DOM update 执行频率很高，会导致性能问题，所以这里加
@@ -319,11 +240,14 @@ function unbind(el) {
 export default class VTrack {
   constructor() {
     this.installed = false;
+    this.curPage = null; // 保存当前页name
   }
   // 保存当前点击的元素
   static target = null;
   // Vue.use 将执行此方法
   static install(Vue, { trackEvents, trackAction }) {
+    const self = this;
+
     if (this.installed) return;
     this.installed = true;
 
@@ -349,10 +273,10 @@ export default class VTrack {
       // 统计UV、PV
       beforeRouteEnter(to, from, next) {
         // 防止有些情况该守卫执行多次导致重复埋点的问题
-        if (!from.matched.length || to.name === curPage) {
+        if (!from.matched.length || to.name === self.curPage) {
           next();
         } else {
-          curPage = to.name;
+          self.curPage = to.name;
           trackEvents.UVPV();
           next();
         }
