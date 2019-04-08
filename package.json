@@ -1,6 +1,6 @@
 {
   "name": "v-track",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "一个基于Vue指令的埋点插件",
   "main": "dist/v-track.min.js",
   "module": "dist/v-track.esm.js",
