@@ -2,20 +2,12 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-07 23:59:07
+ * @Last Modified time: 2019-04-08 10:55:26
  */
 import VisMonitor from "./utils/vis-monitor";
 
 let curPage = null; // 保存当前页name
-const MODIFIERS = [
-  "async",
-  "shadow",
-  "delay",
-  "watch",
-  "show",
-  "once",
-  "custom"
-]; // 修饰符
+const MODIFIERS = ["async", "delay", "watch", "show", "once", "custom"]; // 修饰符
 const isProd = process.env.NODE_ENV === "production";
 const isUndef = v => v === undefined || v === null;
 const isDef = v => v !== undefined && v !== null;
@@ -104,22 +96,24 @@ function _watcher(el, exp, cbk, ctt, mdf, ops = {}) {
 
 /*************************************************************************
  * @description 自定义指令 v-track
+ *
  * @param {*} el 指令所绑定的元素
  * @param {String} arg 埋点对应event ID
- * @param {Boolean} modifiers.shadow 是否为虚拟dom（即组件）
  * @param {Boolean} modifiers.click true: 事件行为埋点; false: 页面级埋点
  * @param {Boolean} modifiers.watch 异步埋点
  * @param {Boolean} modifiers.async 点击事件异步埋点
  * @param {Boolean} modifiers.delay 埋点是否延迟执行，默认先执行埋点再执行cbk
- * @var {Function} tck 对应埋点方法
+ *
+ * @property {Function} tck 对应埋点方法
+ *
  * @example v-track:18015
- * @example v-track:18015.click
  * @example v-track:18015.watch
+ * @example v-track:18015.watch.delay
+ * @example v-track:18015.click
  * @example v-track:18015.click.async
  * @example v-track:18015.click.delay
- * @example v-track:18015.watch.delay
- * @example v-track:18015.[自定义事件名].shadow
- * @example v-track:18015.[自定义事件名].shadow.async
+ * @example v-track:18015.[自定义事件名].delay
+ * @example v-track:18015.[自定义事件名].async
  *************************************************************************/
 function bind(
   el,
@@ -190,7 +184,7 @@ function bind(
       (once ? vm.$once : vm.$on).call(vm, "fullyvisible", fn);
       el.$visMonitor = vm;
     }
-  } else if (!modifiers.shadow && modifiers.click) {
+  } else if (!componentInstance && modifiers.click) {
     /**
      * @description DOM元素事件行为埋点(需区分是否带参数)
      * @var {Function} fn 获取第一个参数作为回调函数
@@ -230,7 +224,6 @@ function bind(
      * @var {Function} fn 获取第一个参数作为回调函数
      * @var {String} exp 获取最后一个参数并作为监听对象
      */
-    modifiers.shadow &&
     componentInstance &&
     componentInstance.$el === el
   ) {
