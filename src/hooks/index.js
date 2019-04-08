@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 12:22:34
+ * @Last Modified time: 2019-04-08 12:53:29
  */
 import {
   isProd,
@@ -108,7 +108,7 @@ export function bind(
       el.$timer = setTimeout(() => {
         const visible = isVisible(context.$el);
 
-        !visible && events[id](context);
+        visible && events[id](context);
       }, value.delay);
     };
     watcher(exp, tck, {
