@@ -13,5 +13,10 @@ module.exports = {
     // "@babel/plugin-transform-runtime",
     // "@babel/plugin-transform-modules-commonjs",
     "@babel/plugin-proposal-class-properties"
-  ]
+  ],
+  env: {
+    test: {
+      presets: ["@babel/preset-env"]
+    }
+  }
 };
