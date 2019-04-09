@@ -51,7 +51,7 @@ export default {
     ...
   },
   /**
-   * 页面停留时间埋点（Time on Page）
+   * @desc 页面停留时间埋点（Time on Page）
    * @param {String} stt 进入页面时长，单位为秒
    */
   TONP({ stt }) {
@@ -72,13 +72,13 @@ export default {
 ```
 
 ```HTML
-<!-- 页面行为埋点 -->
+<!-- 页面行为埋点（track-view为v-track全局注册的组件） -->
 <track-view v-track:18015></track-view>
 <track-view v-track:18015.watch="{ result }"></track-view>
 <track-view v-track:18015.watch.delay="{ result }"></track-view>
 <track-view v-if v-track:18015="{ result }"></track-view>
 
-<!-- 事件行为埋点（原生DOM） -->
+<!-- 事件行为埋点（DOM） -->
 <div v-track:18015.click="handleClick"></div>
 <div v-track:18015.click="{ handleClick, item, index }"></div>
 <div v-track:18015.click.async="{ handleSearch, searchResult }"></div>
