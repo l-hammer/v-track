@@ -2,32 +2,20 @@
   "name": "v-track",
   "version": "0.2.1",
   "description": "一个基于Vue指令的埋点插件",
-  "main": "dist/v-track.min.js",
-  "module": "dist/v-track.esm.js",
+  "author": "LHammer <lhammer@qq.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run build:es && npm run build:browser",
-    "build:es": "rollup --config build/rollup.config.es.js",
+    "test": "npm run lint && npm run test:unit",
+    "lint": "vue-cli-service lint",
     "build:browser": "rollup --config build/rollup.config.browser.js && npm run size",
+    "build:es": "rollup --config build/rollup.config.es.js",
     "prepublishOnly": "npm run build",
     "size": "gzip-size dist/v-track.min.js",
-    "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/l-hammer/v-track.git"
-  },
-  "keywords": [
-    "vue",
-    "javascript",
-    "track",
-    "directive",
-    "plugin",
-    "vue-components"
-  ],
-  "author": "LHammer <lhammer@qq.com>",
-  "license": "MIT",
+  "main": "dist/v-track.min.js",
+  "module": "dist/v-track.esm.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -39,10 +27,11 @@
     "@babel/preset-env": "^7.4.3",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-plugin-unit-jest": "^3.5.0",
+    "@vue/cli-plugin-unit-jest": "^3.5.3",
     "@vue/cli-service": "^3.5.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
@@ -53,6 +42,20 @@
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.1",
     "rollup-plugin-uglify": "^6.0.2",
+    "vue": "^2.6.10",
     "vue-template-compiler": "^2.5.21"
+  },
+  "keywords": [
+    "vue",
+    "javascript",
+    "track",
+    "directive",
+    "plugin",
+    "vue-components"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l-hammer/v-track.git"
   }
 }
