@@ -76,7 +76,7 @@ export default {
 <track-view v-track:18015></track-view>
 <track-view v-track:18015.watch="{ result }"></track-view>
 <track-view v-track:18015.watch.delay="{ result }"></track-view>
-<track-view v-if v-track:18015="{ result }"></track-view>
+<track-view v-if="result" v-track:18015></track-view>
 
 <!-- 事件行为埋点（DOM） -->
 <div v-track:18015.click="handleClick"></div>
