@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 15:59:04
+ * @Last Modified time: 2019-04-13 22:54:49
  */
 import {
   isProd,
@@ -186,7 +186,7 @@ export function bind(
         }
         if (el[`$on_${eventName}`]) break;
         componentInstance.$on(eventName, (...args) => {
-          this.target = (args[0].e || args[0].event).target;
+          this.target = el;
           tck = events[id].bind(null, context, args[0]);
           queue = [tck, fn.bind(null, ...args)];
           modifiers.delay && queue.reverse();
@@ -198,7 +198,7 @@ export function bind(
       }
       case "function":
         componentInstance.$on(eventName, data => {
-          const args = Object.values(data);
+          const args = Object.values(data || {});
 
           tck = events[id].bind(null, context, data);
           queue = [tck, value.bind(null, ...args)];
