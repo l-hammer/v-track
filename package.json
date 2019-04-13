@@ -1,6 +1,6 @@
 {
   "name": "v-track",
-  "version": "0.2.1",
+  "version": "0.2.9",
   "description": "一个基于Vue指令的埋点插件",
   "author": "LHammer <lhammer@qq.com>",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "build:browser": "rollup --config build/rollup.config.browser.js && npm run size",
     "build:es": "rollup --config build/rollup.config.es.js",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run test && npm run build",
     "size": "gzip-size dist/v-track.min.js",
     "test:unit": "vue-cli-service test:unit"
   },
