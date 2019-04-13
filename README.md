@@ -47,7 +47,7 @@ Vue.use(VTrack, {
 ```js
 /* track-events.js */
 export default {
-  /** @desc UP、PV埋点 */
+  /** @desc UV、PV埋点 */
   UVPV() {
     ...
   },
