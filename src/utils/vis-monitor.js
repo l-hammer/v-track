@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 12:00:05
+ * @Last Modified time: 2019-04-13 23:10:29
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -11,7 +11,7 @@ import { isFun, debounce } from "./helper";
  * @class
  * @name VisMonitor
  *
- * @deec 目标元素控制器
+ * @desc 目标元素控制器
  */
 export default class VisMonitor {
   constructor(ele, ref) {

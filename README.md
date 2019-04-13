@@ -47,11 +47,15 @@ Vue.use(VTrack, {
 ```js
 /* track-events.js */
 export default {
-  /** @desc UV、PV埋点 */
+  /**
+   * @name UVPV 固定名称不支持修改
+   * @desc UV、PV埋点
+   */
   UVPV() {
     ...
   },
   /**
+   * @name TONP 固定名称不支持修改
    * @desc 页面停留时间埋点（Time on Page）
    * @param {String} stt 进入页面时长，单位为秒
    */
@@ -59,13 +63,11 @@ export default {
     ...
   },
   /**
+   * @name 18015 埋点唯一标识ID（自定义）
    * @param {Object} context 当前上下文
    * @param {Object} args 剩余参数
    */
   18015(context, args) {
-    ...
-  }
-  18016(context, args) {
     ...
   }
   ...
@@ -82,20 +84,20 @@ export default {
 <!-- 事件行为埋点（DOM） -->
 <div v-track:18015.click="handleClick"></div>
 <div v-track:18015.click="{ handleClick, item, index }"></div>
-<div v-track:18015.click.async="{ handleSearch, searchResult }"></div>
+<div v-track:18015.click.async="{ handleSearch, rest }"></div>
 <div v-track:18015.click.delay="handleClick"></div>
 
 <!-- 事件行为埋点（组件） -->
 <cmp v-track:18015.click="handleClick"></cmp>
 <cmp v-track:18015.[自定义事件名]="handleSearch"></cmp>
 <cmp v-track:18015.[自定义事件名].delay="handleSearch"></cmp>
-<cmp v-track:18015.[自定义事件名].async="{ handleSearch, searchResult }"></cmp>
+<cmp v-track:18015.[自定义事件名].async="{ handleSearch, rest }"></cmp>
 
-<!-- 区域展现埋点 -->
-<cmp v-track:18015.show></cmp>
-<cmp v-track:18015.show.once></cmp>
-<cmp v-track:18015.show.custom="{ ref: 'scroll' }"></cmp>
-<cmp v-track:18015.show.custom.once="{ ref: 'scroll' }"></cmp>
+<!-- 区域展现埋点（block 可以是 DOM 或者组件） -->
+<block v-track:18015.show></block>
+<block v-track:18015.show.once></block>
+<block v-track:18015.show.custom="{ ref: 'scroll' }"></block>
+<block v-track:18015.show.custom.once="{ ref: 'scroll' }"></block>
 ```
 
 ## LICENSE
