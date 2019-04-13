@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-09 21:41:47
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-09 21:59:12
+ * @Last Modified time: 2019-04-13 22:31:03
  */
 import Vue from "vue";
 import VTrack from "@/";
@@ -34,7 +34,7 @@ localVue.use(VTrack, {
 });
 
 describe("TrackClick", () => {
-  it("确保埋点在click事件之后执行", () => {
+  it("确保埋点在click事件之后上报", () => {
     const wrapper = mount(TrackClick, {
       localVue
     });

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-12 21:03:46
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-13 15:01:44
+ * @Last Modified time: 2019-04-13 22:58:00
  */
 import Vue from "vue";
 import VTrack from "@/";
@@ -15,7 +15,7 @@ const trackEvents = {
   18015: mockTrackAction
 };
 const Cmp = Vue.extend({
-  template: `<div class="test"></div>`
+  template: `<div></div>`
 });
 const CmpTrackShowCustomOnce = Vue.extend({
   template: `

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-09 19:08:17
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-09 21:40:16
+ * @Last Modified time: 2019-04-13 22:30:28
  */
 import Vue from "vue";
 import VTrack from "@/";
@@ -35,7 +35,7 @@ localVue.use(VTrack, {
 });
 
 describe("TrackClickAsync", () => {
-  it("确保异步事件返回成功之后再触发埋点", done => {
+  it("确保异步的事件返回成功之后再上报埋点", done => {
     const wrapper = mount(TrackClickAsync, {
       localVue
     });

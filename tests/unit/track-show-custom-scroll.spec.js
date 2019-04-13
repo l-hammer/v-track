@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-12 21:03:46
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-13 15:02:02
+ * @Last Modified time: 2019-04-13 22:57:53
  */
 import Vue from "vue";
 import VTrack from "@/";
@@ -15,9 +15,9 @@ const trackEvents = {
   18015: mockTrackAction
 };
 const Cmp = Vue.extend({
-  template: `<div class="test"></div>`
+  template: `<div></div>`
 });
-const CmpTrackShowCustom = Vue.extend({
+const TrackShowCustomScroll = Vue.extend({
   template: `
     <span>
       <cmp ref="scroll" v-track:18015.show.custom="{ref: 'scroll'}" />
@@ -34,9 +34,9 @@ localVue.use(VTrack, {
 
 jest.useFakeTimers();
 
-describe("CmpTrackShowCustom", () => {
+describe("TrackShowCustomScroll", () => {
   it("确保组件完全可见之后触发埋点，且至少间隔200ms执行一下", () => {
-    const wrapper = mount(CmpTrackShowCustom, { localVue });
+    const wrapper = mount(TrackShowCustomScroll, { localVue });
     const vm = wrapper.find(Cmp).vm;
 
     mockParentNode(vm.$el);
