@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-13 22:54:49
+ * @Last Modified time: 2019-04-14 15:39:17
  */
 import {
   isProd,
@@ -21,24 +21,15 @@ const MODIFIERS = ["async", "delay", "watch", "show", "once", "custom"]; // 修�
  * @description 监听数据发生改变时触发埋点，需处理两种情况：
  * ① 初始化时开始监听 v-track:xxxxx.watch="{ common_exp }"
  * ops.immediate 表示初始化时立即开始监听
- * ops.page === $route.name 避免多个页面同时监听同一个值(store中的common值)重复埋点的问题
  *
  * ② 点击事件之后开始监听 v-track:18016.click.async="{ refreshHotSpot, exposureId }"
  * el.contains(this.target) 避免多个“地方”同时监听同一个值出现多次上报的问题
  *******************************************************************************/
-function _watcher(el, exp, cbk, ctt, mdf, ops = {}) {
+function _watcher(el, exp, cbk, ctt, ops = {}) {
   el.$unwatch = ctt.$watch(
     () => ctt[exp],
     (nv, ov) => {
-      const { $route } = ctt;
-
-      if (!isProd && ops.immediate && !$route && !$route.name && mdf.watch) {
-        throw new Error("$route 不存在");
-      }
-      nv !== ov &&
-        ((ops.immediate && ops.name === $route.name) ||
-          el.contains(this.target)) &&
-        cbk();
+      nv !== ov && (ops.immediate || el.contains(this.target)) && cbk();
       this.target = null; // 释放当前操作的watcher
     }
   );
@@ -78,7 +69,7 @@ export function bind(
   let queue = [];
   let tck = events[id].bind(null, context);
   const watcher = (exp, cbk, ops) =>
-    _watcher.call(this, el, exp, cbk, context, modifiers, ops);
+    _watcher.call(this, el, exp, cbk, context, ops);
   const exactMatch = (...args) => _exactMatch.call(null, modifiers, args);
   const partialMatch = (...args) => _partialMatch.call(null, modifiers, args);
 
@@ -90,7 +81,6 @@ export function bind(
     const exp = Object.keys(value).shift();
 
     watcher(exp, tck, {
-      name: context.$route.name,
       immediate: true
     });
   }
@@ -112,7 +102,6 @@ export function bind(
       }, value.delay);
     };
     watcher(exp, tck, {
-      name: context.$route.name,
       immediate: true
     });
   }
