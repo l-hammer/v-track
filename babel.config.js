@@ -7,7 +7,16 @@ module.exports = {
       }
     ]
   ],
-  plugins: ["@babel/plugin-proposal-class-properties"],
+  plugins: [
+    "@babel/plugin-proposal-class-properties",
+    [
+      "component",
+      {
+        libraryName: "element-ui",
+        styleLibraryName: "theme-chalk"
+      }
+    ]
+  ],
   env: {
     test: {
       presets: ["@babel/preset-env"]

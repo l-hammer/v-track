@@ -1,0 +1,23 @@
+.v-track-table {
+  .header,
+  .row {
+    display: flex;
+    strong,
+    span {
+      flex: 1;
+      line-height: 29px;
+      border-bottom: 1px solid #ebeef5;
+    }
+  }
+  .row:hover {
+    background: #fafafa;
+    cursor: pointer;
+  }
+}
+
+.notification__large {
+  width: 399px;
+  .el-notification__group {
+    width: 100%;
+  }
+}
