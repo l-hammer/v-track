@@ -19,11 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-transform-async-to-generator": "^7.4.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
-    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
