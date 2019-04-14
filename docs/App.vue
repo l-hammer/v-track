@@ -30,6 +30,12 @@
     </header>
 
     <router-view />
+
+    <section class="footer">
+      <div class="section-content mini">
+        Copyright © 2019-present LHammer
+      </div>
+    </section>
   </div>
 </template>
 
@@ -61,6 +67,12 @@ section {
     margin: 0 42px;
     padding: 64px 0;
     box-sizing: border-box;
+    &.small {
+      padding: 32px 0;
+    }
+    &.mini {
+      padding: 16px 0;
+    }
   }
   &.nav {
     text-align: center;
@@ -306,6 +318,10 @@ label input {
 .snippet + .snippet {
   margin-top: 20px;
 }
+.snippet:last-child {
+  margin-bottom: 39px;
+}
+
 .snippets {
   background: #f9f9f9;
   border-radius: 0 0 3px 3px;
@@ -347,8 +363,8 @@ label input {
     }
   }
 }
-.more {
-  font-size: 24px;
+.footer {
+  font-size: 14px;
   text-align: center;
   background: lighten($primary-color, 45%);
 }

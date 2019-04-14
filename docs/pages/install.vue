@@ -8,20 +8,18 @@
     </section>
 
     <section class="snippets">
-      <div class="section-content" style="padding-bottom: 0;">
+      <div class="section-content small">
         完整示例可参考
         <a href="https://github.com/l-hammer/v-track/tree/master">GitHub</a>
       </div>
     </section>
 
     <section class="snippets">
-      <div class="section-content">
-        <CodeSnippet class="snippet" :code="eventsSnippet" lang="js" />
-        <div class="plus">+</div>
-        <CodeSnippet class="snippet" :code="mainSnippet" lang="js" />
-        <div class="plus">+</div>
-        <CodeSnippet class="snippet" :code="componentSnippet" lang="html" />
-      </div>
+      <CodeSnippet class="snippet" :code="eventsSnippet" lang="js" />
+      <div class="plus">+</div>
+      <CodeSnippet class="snippet" :code="mainSnippet" lang="js" />
+      <div class="plus">+</div>
+      <CodeSnippet class="snippet" :code="componentSnippet" lang="html" />
     </section>
   </div>
 </template>
