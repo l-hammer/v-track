@@ -2,23 +2,22 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-14 15:39:17
+ * @Last Modified time: 2019-04-14 16:10:11
  */
 import {
-  isProd,
-  isFun,
   zipArray,
   exactlySameVnode,
   _exactMatch,
   _partialMatch
 } from "../utils/helper";
+import * as debug from "../utils/debug";
 import { isVisible } from "../utils/dom";
 import VisMonitor from "../utils/vis-monitor";
 
 const MODIFIERS = ["async", "delay", "watch", "show", "once", "custom"]; // 修饰符
 
 /*******************************************************************************
- * @description 监听数据发生改变时触发埋点，需处理两种情况：
+ * @desc 监听数据发生改变时触发埋点，需处理两种情况：
  * ① 初始化时开始监听 v-track:xxxxx.watch="{ common_exp }"
  * ops.immediate 表示初始化时立即开始监听
  *
@@ -36,7 +35,7 @@ function _watcher(el, exp, cbk, ctt, ops = {}) {
 }
 
 /*************************************************************************
- * @description 自定义指令 v-track
+ * @desc 自定义指令 v-track
  *
  * @param {*} el 指令所绑定的元素
  * @param {String} arg 埋点对应event ID
@@ -119,7 +118,7 @@ export function bind(
     }
   } else if (!componentInstance && modifiers.click) {
     /**
-     * @description DOM元素事件行为埋点(需区分是否带参数)
+     * @desc DOM元素事件行为埋点(需区分是否带参数)
      * @var {Function} fn 获取第一个参数作为回调函数
      * @var {String} exp 获取最后一个参数并作为监听对象
      */
@@ -132,9 +131,8 @@ export function bind(
           .slice(1)
           .reduce((state, k) => ((state[k] = value[k]), state), {});
 
-        if (!isProd && !isFun(fn)) {
-          throw new Error("第一个参数应该为 Function~");
-        }
+        debug.checkFun(fn);
+
         tck = events[id].bind(null, context, tck_args);
         queue = [tck, fn.bind(null, ...args)];
         modifiers.delay && queue.reverse();
@@ -153,7 +151,7 @@ export function bind(
     el.addEventListener("click", el.$listener);
   } else if (
     /**
-     * @description 组件自定义事件行为埋点(需区分是否带参数)
+     * @desc 组件自定义事件行为埋点(需区分是否带参数)
      * @var {Function} fn 获取第一个参数作为回调函数
      * @var {String} exp 获取最后一个参数并作为监听对象
      */
@@ -170,9 +168,8 @@ export function bind(
         const fn = args.shift();
         const exp = [...keys].pop();
 
-        if (!isProd && !isFun(fn)) {
-          throw new Error("第一个参数应该为 Function~");
-        }
+        debug.checkFun(fn);
+
         if (el[`$on_${eventName}`]) break;
         componentInstance.$on(eventName, (...args) => {
           this.target = el;
@@ -197,14 +194,12 @@ export function bind(
         break;
     }
   } else {
-    if (!isProd) {
-      throw new Error(`${rawName}指令暂不支持`);
-    }
+    debug.tip(rawName);
   }
 }
 
 /**
- * @description 由于 DOM 更新采用 diff 算法更新，如果新旧节点相同，则 el 会全等，导致 bind 绑定无法更
+ * @desc 由于 DOM 更新采用 diff 算法更新，如果新旧节点相同，则 el 会全等，导致 bind 绑定无法更
  * 新，出现事件绑定诡异的问题，但由于 DOM update 执行频率很高，会导致性能问题，所以这里加
  * 了一层exactlySameVnode过滤，即只有在新旧节点发生变化时才会重新绑定，否则相反
  *
