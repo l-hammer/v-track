@@ -1,9 +1,10 @@
 const path = require("path");
+const isProd = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  lintOnSave: process.env.NODE_ENV !== "production",
+  lintOnSave: isProd,
   outputDir: "./docs/dist",
-  publicPath: "./dist",
+  publicPath: isProd ? "./" : "./dist/",
   indexPath: "../index.html",
 
   configureWebpack: {
