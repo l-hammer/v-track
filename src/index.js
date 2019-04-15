@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-15 15:49:50
+ * @Last Modified time: 2019-04-15 16:55:12
  */
 import * as hooks from "./hooks";
 
@@ -14,18 +14,13 @@ export default class VTrack {
   // 保存当前点击的元素
   static target = null;
   // Vue.use 将执行此方法
-  static install(
-    Vue,
-    {
-      trackEvents,
-      trackAction,
-      trackEnable = {
-        UVPV: true,
-        TONP: true
-      }
-    }
-  ) {
+  static install(Vue, { trackEvents, trackAction, trackEnable = {} }) {
     const self = this;
+    trackEnable = {
+      UVPV: false,
+      TONP: false,
+      ...trackEnable
+    };
     const TRACK_TONP = entertime => {
       if (trackEnable.TONP) {
         trackEvents.TONP({
