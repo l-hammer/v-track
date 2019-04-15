@@ -76,6 +76,10 @@ import trackEvents, { trackAction } from "./tracks";
 Vue.use(VTrack, {
   trackEvents, // 埋点事件对象
   trackAction, // 埋点公用方法
+  trackEnable: {
+    UVPV: false, // 是否开启UVPV统计，默认为true
+    TONP: true // 是否开启页面停留时长统计，默认为true
+  }
 })
 `;
 const componentSnippet = `

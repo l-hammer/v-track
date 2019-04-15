@@ -11,7 +11,11 @@ Vue.use(VueRouter);
 Vue.use(Alert);
 Vue.use(VueTrack, {
   trackEvents,
-  trackAction
+  trackAction,
+  trackEnable: {
+    UVPV: false,
+    TONP: true
+  }
 });
 
 Vue.prototype.$message = Message;
