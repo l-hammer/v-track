@@ -59,15 +59,8 @@ section {
 }
 h1 {
   color: white;
-  font-weight: normal;
   text-align: center;
   margin: 0 0 32px;
-}
-h2 {
-  &:first-child {
-    margin-top: 0;
-  }
-  font-weight: normal;
 }
 a {
   color: $primary-color;
