@@ -2,7 +2,7 @@
 
 <a href="https://unpkg.com/v-track/dist/v-track.min.js"><img src="https://img.badgesize.io/https://unpkg.com/v-track/dist/v-track.min.js?compression=gzip&style=flat-square" alt="Gzip Size" /></a>
 <a href="https://www.npmjs.com/package/v-track"><img src="https://img.shields.io/npm/v/v-track.svg?colorB=brightgreen&style=flat-square"></a>
-<a href="https://github.com/facebook/jest"><img src="https://img.shields.io/badge/tested_with-jest-99424f.svg?style=flat-square"></a>
+<a href="https://github.com/l-hammer/v-track/tree/master/tests/unit"><img src="https://img.shields.io/badge/tested_with-jest-99424f.svg?style=flat-square"></a>
 <a href="http://hits.dwyl.io/l-hammer/v-track" alt="hit count"><img src="http://hits.dwyl.io/l-hammer/v-track.svg" /></a>
 
 v-track通过 Vue [自定义指令](https://cn.vuejs.org/v2/guide/custom-directive.html)的方式将埋点代码与业务代码完全解耦~
