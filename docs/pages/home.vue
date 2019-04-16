@@ -22,7 +22,7 @@
     <section class="demo">
       <el-alert
         center
-        type="warning"
+        type="info"
         title="这是一个点击事件行为的埋点"
         :closable="false"
       >
@@ -41,7 +41,7 @@
     <section class="demo">
       <el-alert
         center
-        type="warning"
+        type="info"
         title="这个一个带参数点击事件行为的埋点，默认最后一个参数为event事件对象"
         :closable="false"
       >
@@ -49,7 +49,7 @@
       <div class="section-content">
         <div
           class="track-button"
-          v-track:18016.click="{ handleClickParam, item }"
+          v-track:18016.click="{ handleClickWithParam, item }"
         >
           click me
         </div>
@@ -57,14 +57,18 @@
     </section>
 
     <section class="snippets">
-      <CodeSnippet class="snippet" lang="html" :code="trackClickSnippetParam" />
+      <CodeSnippet
+        class="snippet"
+        lang="html"
+        :code="trackClickWithParamSnippet"
+      />
     </section>
 
     <section class="demo">
       <el-alert
         center
-        type="warning"
-        title="这是一个发生在事件之后的埋点，默认先执行埋点再执行事件，比如index初始值为0，点击事件会将index加1，所以埋点获取到的index值应该为1，依次点击则累加"
+        type="info"
+        title="这是一个发生在事件之后的埋点，默认先执行埋点再执行事件，如示例所示：index初始值为0，点击事件会将index加1，所以埋点获取到的index值应该为1，依次点击则累加"
         :closable="false"
       >
       </el-alert>
@@ -76,15 +80,22 @@
     </section>
 
     <section class="snippets">
-      <CodeSnippet class="snippet" lang="js" :code="jsTrackClickSnippetDelay" />
-      <CodeSnippet class="snippet" lang="html" :code="trackClickSnippetDelay" />
+      <CodeSnippet class="snippet" lang="html" :code="trackClickDelaySnippet" />
+      <CodeSnippet class="snippet" lang="js" :code="jsTrackClickDelaySnippet" />
     </section>
 
     <section class="demo">
       <el-alert
         center
+        type="info"
+        title="这是一个有异步行为的事件埋点，如示例所示：rest初始值为null，点击事件会fetch为success，所以埋点获取到的rest值应该为success"
+        :closable="false"
+      >
+      </el-alert
+      ><el-alert
+        center
         type="warning"
-        title="这是一个有异步行为的事件埋点，比如rest初始值为null，点击事件会fetch为success，所以埋点获取到的rest值应该为success"
+        title="备注：修饰符 async 是基于 Vue 实例提供的 vm.$watch 方法，所以只有在返回结果 rest 发生变化时才会触发埋点"
         :closable="false"
       >
       </el-alert>
@@ -99,8 +110,8 @@
     </section>
 
     <section class="snippets">
-      <CodeSnippet class="snippet" lang="js" :code="jsTrackClickSnippetAsync" />
-      <CodeSnippet class="snippet" lang="html" :code="trackClickSnippetAsync" />
+      <CodeSnippet class="snippet" lang="html" :code="trackClickAsyncSnippet" />
+      <CodeSnippet class="snippet" lang="js" :code="jsTrackClickAsyncSnippet" />
     </section>
   </div>
 </template>
@@ -111,13 +122,13 @@ import CodeSnippet from "../components/code-snippet";
 const trackClickSnippet = `
 <div class="track-button" v-track:18015.click="handleClick">click me</div>
 `;
-const trackClickSnippetParam = `
-<div class="track-button" v-track:18016.click="{ handleClickParam, item }">click me</div>
+const trackClickWithParamSnippet = `
+<div class="track-button" v-track:18016.click="{ handleClickWithParam, item }">click me</div>
 `;
-const trackClickSnippetDelay = `
-<div class="track-button" v-track:18017.click.delay="handleClickParam">click me</div>
+const trackClickDelaySnippet = `
+<div class="track-button" v-track:18017.click.delay="handleClickWithParam">click me</div>
 `;
-const jsTrackClickSnippetDelay = `
+const jsTrackClickDelaySnippet = `
 data() {
   return {
     index: 0
@@ -130,10 +141,10 @@ methods: {
   },
 }
 `;
-const trackClickSnippetAsync = `
+const trackClickAsyncSnippet = `
 <div class="track-button" v-track:18018.click.delay="handleClickAsync">click me</div>
 `;
-const jsTrackClickSnippetAsync = `
+const jsTrackClickAsyncSnippet = `
 data() {
   return {
     rest: null
@@ -160,11 +171,11 @@ export default {
   data() {
     return {
       trackClickSnippet,
-      trackClickSnippetParam,
-      trackClickSnippetDelay,
-      trackClickSnippetAsync,
-      jsTrackClickSnippetDelay,
-      jsTrackClickSnippetAsync,
+      trackClickWithParamSnippet,
+      trackClickDelaySnippet,
+      trackClickAsyncSnippet,
+      jsTrackClickDelaySnippet,
+      jsTrackClickAsyncSnippet,
       item: {
         id: Math.random()
           .toString(36)
@@ -178,12 +189,13 @@ export default {
     handleClick() {
       this.$message.success("事件执行成功");
     },
-    handleClickParam(item) {
-      this.$message.success(`事件执行成功，参数为${JSON.stringify(item)}`);
+    handleClickWithParam(item, { target }) {
+      this.$message.success(
+        `事件执行成功，参数为${JSON.stringify(item)}--${target}`
+      );
     },
     handleClickDelay() {
       this.index++;
-      this.$message.success("事件执行成功");
     },
     async handleClickAsync() {
       const response = await new Promise(resolve => {
@@ -211,5 +223,13 @@ export default {
   color: white;
   line-height: 39px;
   margin: auto;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    background: lighten($primary-color, 5%);
+  }
+  &:active {
+    background: darken($primary-color, 5%);
+  }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 17:10:31
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-16 10:55:05
+ * @Last Modified time: 2019-04-16 21:48:58
  */
 import trackAction from "./action";
 
@@ -55,6 +55,31 @@ export default {
   },
   18018({ rest, $route: { name } }) {
     trackAction("18018", {
+      source_page: name, // 页面来源
+      rest
+    });
+  },
+  18019(
+    {
+      $route: { name }
+    },
+    { id },
+    { target }
+  ) {
+    trackAction("18019", {
+      id, // 知识ID
+      source_page: name, // 页面来源
+      target
+    });
+  },
+  18020({ activeName, $route: { name } }) {
+    trackAction("18020", {
+      source_page: name, // 页面来源
+      active_name: activeName
+    });
+  },
+  18021({ rest, $route: { name } }) {
+    trackAction("18021", {
       source_page: name, // 页面来源
       rest
     });
