@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-14 16:10:11
+ * @Last Modified time: 2019-04-16 22:40:22
  */
 import {
   zipArray,
@@ -158,41 +158,28 @@ export function bind(
     componentInstance &&
     componentInstance.$el === el
   ) {
+    let args, keys, fn, exp;
     const eventName = Object.keys(modifiers)
       .filter(key => !MODIFIERS.includes(key))
       .pop();
 
-    switch (typeof value) {
-      case "object": {
-        const [args, keys] = zipArray(value);
-        const fn = args.shift();
-        const exp = [...keys].pop();
-
-        debug.checkFun(fn);
-
-        if (el[`$on_${eventName}`]) break;
-        componentInstance.$on(eventName, (...args) => {
-          this.target = el;
-          tck = events[id].bind(null, context, args[0]);
-          queue = [tck, fn.bind(null, ...args)];
-          modifiers.delay && queue.reverse();
-          modifiers.async && watcher(exp, queue.shift());
-          queue.forEach(sub => sub());
-          el[`$on_${eventName}`] = true; // 避免重复监听
-        });
-        break;
-      }
-      case "function":
-        componentInstance.$on(eventName, data => {
-          const args = Object.values(data || {});
-
-          tck = events[id].bind(null, context, data);
-          queue = [tck, value.bind(null, ...args)];
-          modifiers.delay && queue.reverse();
-          queue.forEach(sub => sub());
-        });
-        break;
+    if (typeof value === "object") {
+      [args, keys] = zipArray(value);
+      fn = args.shift();
+      exp = [...keys].pop();
+      debug.checkFun(fn);
     }
+
+    if (el[`$on_${eventName}`]) return;
+    componentInstance.$on(eventName, (...data) => {
+      this.target = el;
+      tck = events[id].bind(null, context, ...data);
+      queue = [tck, (fn || value).bind(null, ...data)];
+      modifiers.delay && queue.reverse();
+      modifiers.async && watcher(exp, queue.shift());
+      queue.forEach(sub => sub());
+      el[`$on_${eventName}`] = true; // 避免重复监听
+    });
   } else {
     debug.tip(rawName);
   }
