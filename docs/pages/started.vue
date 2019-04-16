@@ -1,10 +1,22 @@
 <template>
-  <div class="page-install page">
+  <div class="page-started page">
     <section class="nav">
-      <router-link :to="{ name: 'home' }">
-        Back
+      <router-link :to="{ name: 'HOME' }">
+        返回
       </router-link>
-      <a href="https://github.com/l-hammer/v-track/issues">Report an issue</a>
+      <router-link :to="{ name: 'HOME' }">
+        事件行为埋点
+      </router-link>
+      <router-link :to="{ name: 'CUSTOM_EVENTS' }">
+        自定义事件埋点
+      </router-link>
+      <router-link :to="{ name: 'TRACK_VIEW' }">
+        页面行为埋点
+      </router-link>
+      <router-link :to="{ name: 'BLOCK_SHOW' }">
+        区域展现埋点
+      </router-link>
+      <a href="https://github.com/l-hammer/v-track/issues">打开一个 issue</a>
     </section>
 
     <section class="snippets">
@@ -71,11 +83,10 @@ export default {
 const mainSnippet = `
 import Vue from "vue";
 import VTrack from "v-track";
-import trackEvents, { trackAction } from "./tracks";
+import trackEvents from "./tracks";
 
 Vue.use(VTrack, {
   trackEvents, // 埋点事件对象
-  trackAction, // 埋点公用方法
   trackEnable: {
     UVPV: false, // 是否开启UVPV统计，默认为false
     TONP: true // 是否开启页面停留时长统计，默认为false
@@ -109,7 +120,7 @@ const componentSnippet = `
 `;
 
 export default {
-  name: "Install",
+  name: "Started",
   components: {
     CodeSnippet
   },

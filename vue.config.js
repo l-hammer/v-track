@@ -15,6 +15,10 @@ module.exports = {
       alias: {
         "@": path.resolve(__dirname, "./docs")
       }
+    },
+    performance: {
+      maxEntrypointSize: 1000000,
+      maxAssetSize: 1000000
     }
   },
 

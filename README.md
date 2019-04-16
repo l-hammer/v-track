@@ -24,30 +24,18 @@ $ yarn add v-track
 ## 用法
 
 ```js
-import Vue from 'vue'
-import VTrack from 'v-track'
+import Vue from "vue"
+import VTrack from "v-track"
+import trackEvents from "./tracks"
 
 Vue.use(VTrack, {
   trackEvents, // 埋点事件对象
-  trackAction, // 埋点公用方法
   trackEnable: {
     UVPV: false, // 是否开启UVPV统计，默认为false
     TONP: true // 是否开启页面停留时长统计，默认为false
   }
 })
 ```
-
-## 指令修饰符
-
-- `.click` 表示事件行为的埋点，支持自定义事件
-- `.watch` 表示页面异步行为的埋点
-- `.async` 配合`.click`指令，表示异步事件行为的埋点
-- `.delay` 表示埋点是否延迟执行，默认先执行埋点再执行回调
-- `.show` 表示区域曝光埋点
-- `.once` 配合`.show`指令，只执行一次埋点
-- `.custom` 配合`.show`指令，表示使用自定义scroll事件
-
-## 示例
 
 ```js
 /* track-events.js */
@@ -104,6 +92,16 @@ export default {
 <block v-track:18015.show.custom="{ ref: 'scroll' }"></block>
 <block v-track:18015.show.custom.once="{ ref: 'scroll' }"></block>
 ```
+
+## 指令修饰符
+
+- `.click` 表示事件行为的埋点，支持自定义事件
+- `.watch` 表示页面异步行为的埋点
+- `.async` 配合`.click`指令，表示异步事件行为的埋点
+- `.delay` 表示埋点是否延迟执行，默认先执行埋点再执行回调
+- `.show` 表示区域曝光埋点
+- `.once` 配合`.show`指令，只执行一次埋点
+- `.custom` 配合`.show`指令，表示使用自定义scroll事件
 
 ## LICENSE
 

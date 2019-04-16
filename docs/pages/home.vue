@@ -1,10 +1,22 @@
 <template>
   <div class="page-home page">
     <section class="nav">
-      <router-link :to="{ name: 'install' }">
-        Get Started
+      <router-link :to="{ name: 'STARTED' }">
+        快速开始
       </router-link>
-      <a href="https://github.com/l-hammer/v-track/issues">Report an issue</a>
+      <router-link :to="{ name: 'HOME' }">
+        事件行为埋点
+      </router-link>
+      <router-link :to="{ name: 'CUSTOM_EVENTS' }">
+        自定义事件埋点
+      </router-link>
+      <router-link :to="{ name: 'TRACK_VIEW' }">
+        页面行为埋点
+      </router-link>
+      <router-link :to="{ name: 'BLOCK_SHOW' }">
+        区域展现埋点
+      </router-link>
+      <a href="https://github.com/l-hammer/v-track/issues">打开一个 issue</a>
     </section>
 
     <section class="demo">

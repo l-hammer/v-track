@@ -2,16 +2,18 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import { Alert, Message, Notification } from "element-ui";
 import App from "./App.vue";
-import VueTrack from "../";
 import Home from "./pages/home.vue";
-import Install from "./pages/install.vue";
-import trackEvents, { trackAction } from "./tracks";
+import Started from "./pages/started.vue";
+import CustomEvents from "./pages/custom-events.vue";
+import TrackView from "./pages/track-view.vue";
+import BlockShow from "./pages/block-show.vue";
+import VueTrack from "../";
+import trackEvents from "./tracks";
 
 Vue.use(VueRouter);
 Vue.use(Alert);
 Vue.use(VueTrack, {
   trackEvents,
-  trackAction,
   trackEnable: {
     UVPV: false,
     TONP: true
@@ -23,9 +25,35 @@ Vue.prototype.$notify = Notification;
 
 const router = new VueRouter({
   routes: [
-    { path: "/", name: "home", component: Home },
-    { path: "/install", name: "install", component: Install },
-    { path: "*", redirect: "/" }
+    {
+      path: "/",
+      name: "HOME",
+      component: Home
+    },
+    {
+      path: "/started",
+      name: "STARTED",
+      component: Started
+    },
+    {
+      path: "/custom-events",
+      name: "CUSTOM_EVENTS",
+      component: CustomEvents
+    },
+    {
+      path: "/track-view",
+      name: "TRACK_VIEW",
+      component: TrackView
+    },
+    {
+      path: "/block-show",
+      name: "BLOCK_SHOW",
+      component: BlockShow
+    },
+    {
+      path: "*",
+      redirect: "/"
+    }
   ]
 });
 
