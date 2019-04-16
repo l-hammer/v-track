@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 16:44:42
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-16 10:55:37
+ * @Last Modified time: 2019-04-16 11:28:36
  */
 import { Notification, Message } from "element-ui";
 import { format } from "../utils/date";
@@ -22,12 +22,17 @@ export default function trackAction(evt, addtional = {}) {
     Message("统计UVPV埋点");
   }
   if (evt === "2") {
-    Message("统计页面停留时间埋点");
+    Message({
+      message: "统计页面停留时间埋点",
+      customClass: "message-offset"
+    });
   }
   Notification.success({
     title: "上报数据如下：",
     dangerouslyUseHTMLString: true,
     message: createFragment(data),
-    customClass: "notification__large"
+    customClass: "notification__large",
+    position: evt === "1" || evt === "2" ? "top-left" : "top-right",
+    offset: evt === "2" ? 198 : 0
   });
 }

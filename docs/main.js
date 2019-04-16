@@ -15,7 +15,7 @@ Vue.use(Alert);
 Vue.use(VueTrack, {
   trackEvents,
   trackEnable: {
-    UVPV: false,
+    UVPV: true,
     TONP: true
   }
 });
