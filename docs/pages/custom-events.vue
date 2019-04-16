@@ -192,14 +192,16 @@ const trackCustomEventDelaySnippet = `
 </el-collapse>
 `;
 const jsTrackCustomEventDelaySnippet = `
-data() {
-  return {
-    activeName: "Feedback",
-  };
-},
-methods: {
-  handleChange(val) {
-    this.activeName = val;
+export default {
+  data() {
+    return {
+      activeName: "Feedback",
+    };
+  },
+  methods: {
+    handleChange(val) {
+      this.activeName = val;
+    }
   }
 }
 `;
@@ -207,20 +209,22 @@ const trackCustomEventAsyncSnippet = `
 <Button v-track:18021.custom-event.async="{ fetchRest, rest }"></Button>
 `;
 const jsTrackCustomEventAsyncSnippet = `
-data() {
-  return {
-    rest: null
-  };
-},
-methods: {
-  async fetchRest() {
-    const response = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ data: "success" });
-        this.$message.success("异步事件返回成功");
-      }, 300);
-    });
-    this.rest = response.data;
+export default {
+  data() {
+    return {
+      rest: null
+    };
+  },
+  methods: {
+    async fetchRest() {
+      const response = await new Promise(resolve => {
+        setTimeout(() => {
+          resolve({ data: "success" });
+          this.$message.success("异步事件返回成功");
+        }, 300);
+      });
+      this.rest = response.data;
+    }
   }
 }
 `;

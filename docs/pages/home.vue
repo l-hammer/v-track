@@ -62,6 +62,11 @@
         lang="html"
         :code="trackClickWithParamSnippet"
       />
+      <CodeSnippet
+        class="snippet"
+        lang="js"
+        :code="jsTrackClickWithParamSnippet"
+      />
     </section>
 
     <section class="demo">
@@ -125,40 +130,52 @@ const trackClickSnippet = `
 const trackClickWithParamSnippet = `
 <div class="track-button" v-track:18016.click="{ handleClickWithParam, item }">click me</div>
 `;
+const jsTrackClickWithParamSnippet = `
+export default {
+  data: () => ({
+    item: {
+      id: Date.now().toString(36)
+    },
+  })
+}
+`;
 const trackClickDelaySnippet = `
 <div class="track-button" v-track:18017.click.delay="handleClickWithParam">click me</div>
 `;
 const jsTrackClickDelaySnippet = `
-data() {
-  return {
-    index: 0
-  };
-},
-methods: {
-  handleClickDelay() {
-    this.index++;
-    this.$message.success("事件执行成功");
+export default {
+  data() {
+    return {
+      index: 0
+    };
   },
+  methods: {
+    handleClickDelay() {
+      this.index++;
+    },
+  }
 }
 `;
 const trackClickAsyncSnippet = `
 <div class="track-button" v-track:18018.click.delay="handleClickAsync">click me</div>
 `;
 const jsTrackClickAsyncSnippet = `
-data() {
-  return {
-    rest: null
-  };
-},
-methods: {
-  async handleClickAsync() {
-    const response = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ data: "success" });
-        this.$message.success("异步事件返回成功");
-      }, 300);
-    });
-    this.rest = response.data;
+export default {
+  data() {
+    return {
+      rest: null
+    };
+  },
+  methods: {
+    async handleClickAsync() {
+      const response = await new Promise(resolve => {
+        setTimeout(() => {
+          resolve({ data: "success" });
+          this.$message.success("异步事件返回成功");
+        }, 300);
+      });
+      this.rest = response.data;
+    }
   }
 }
 `;
@@ -172,14 +189,13 @@ export default {
     return {
       trackClickSnippet,
       trackClickWithParamSnippet,
+      jsTrackClickWithParamSnippet,
       trackClickDelaySnippet,
       trackClickAsyncSnippet,
       jsTrackClickDelaySnippet,
       jsTrackClickAsyncSnippet,
       item: {
-        id: Math.random()
-          .toString(36)
-          .substr(2)
+        id: Date.now().toString(36)
       },
       index: 0,
       rest: null
