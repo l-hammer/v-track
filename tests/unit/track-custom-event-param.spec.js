@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-13 21:03:55
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-13 22:56:41
+ * @Last Modified time: 2019-04-16 22:33:20
  */
 import Vue from "vue";
 import VTrack from "@/";
@@ -15,7 +15,7 @@ const trackEvents = {
 };
 const Child = Vue.extend({
   template: `
-    <div @click="$emit('search', { item })" />
+    <div @click="$emit('search', item)" />
   `,
   data() {
     return {
