@@ -48,7 +48,7 @@ export default {
    * @desc UV、PV埋点
    */
   UVPV() {
-    trackAction("1,3");
+    trackAction("1");
   },
   /**
    * @name TONP 固定名称不支持修改

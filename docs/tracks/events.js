@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 17:10:31
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-15 01:33:00
+ * @Last Modified time: 2019-04-16 10:55:05
  */
 import trackAction from "./action";
 
@@ -12,7 +12,7 @@ export default {
    * @desc UV、PV埋点
    */
   UVPV() {
-    trackAction("1,3");
+    trackAction("1");
   },
   /**
    * @name TONP 固定名称不支持修改
