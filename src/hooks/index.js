@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-16 22:40:22
+ * @Last Modified time: 2019-04-17 12:29:17
  */
 import {
   zipArray,
@@ -181,7 +181,7 @@ export function bind(
       el[`$on_${eventName}`] = true; // 避免重复监听
     });
   } else {
-    debug.tip(rawName);
+    throw new Error(`不支持${rawName}指令`);
   }
 }
 
