@@ -1,6 +1,6 @@
 {
   "name": "v-track",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "一个基于Vue指令的埋点插件",
   "author": "LHammer <lhammer@qq.com>",
   "scripts": {
