@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 12:29:17
+ * @Last Modified time: 2019-04-17 21:30:29
  */
 import {
   zipArray,
@@ -90,7 +90,8 @@ export function bind(
       events[id](context);
     }, value);
   } else if (exactMatch("watch", "delay")) {
-    const exp = [...Object.keys(value)].pop();
+    const { delay, ...args } = value;
+    const exp = [...Object.keys(args)].pop();
 
     tck = () => {
       el.$timer && clearTimeout(el.$timer);
@@ -98,7 +99,7 @@ export function bind(
         const visible = isVisible(context.$el);
 
         visible && events[id](context);
-      }, value.delay);
+      }, delay);
     };
     watcher(exp, tck, {
       immediate: true
