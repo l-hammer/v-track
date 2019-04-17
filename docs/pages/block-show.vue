@@ -7,13 +7,13 @@
       <router-link :to="{ name: 'HOME' }">
         事件行为埋点
       </router-link>
-      <router-link :to="{ name: 'HOME' }">
+      <router-link :to="{ name: 'CUSTOM_EVENTS' }">
         自定义事件埋点
       </router-link>
       <router-link :to="{ name: 'TRACK_VIEW' }">
         页面行为埋点
       </router-link>
-      <router-link :to="{ name: 'BLOCK_SHOW' }">
+      <router-link :to="{ name: 'HOME' }">
         返回
       </router-link>
       <a href="https://github.com/l-hammer/v-track/issues">打开一个 issue</a>

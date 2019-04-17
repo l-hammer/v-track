@@ -7,10 +7,10 @@
       <router-link :to="{ name: 'HOME' }">
         事件行为埋点
       </router-link>
-      <router-link :to="{ name: 'HOME' }">
+      <router-link :to="{ name: 'CUSTOM_EVENTS' }">
         自定义事件埋点
       </router-link>
-      <router-link :to="{ name: 'TRACK_VIEW' }">
+      <router-link :to="{ name: 'HOME' }">
         返回
       </router-link>
       <router-link :to="{ name: 'BLOCK_SHOW' }">
@@ -201,7 +201,7 @@ export default {
 `;
 
 export default {
-  name: "TrackView",
+  name: "TrackViews",
   components: {
     CodeSnippet
   },
