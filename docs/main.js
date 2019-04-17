@@ -2,10 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import {
   Alert,
+  Card,
+  Collapse,
+  CollapseItem,
   Message,
-  Notification,
-  collapse,
-  CollapseItem
+  Notification
 } from "element-ui";
 import App from "./App.vue";
 import Home from "./pages/home.vue";
@@ -18,7 +19,8 @@ import trackEvents from "./tracks";
 
 Vue.use(VueRouter);
 Vue.use(Alert);
-Vue.use(collapse);
+Vue.use(Card);
+Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(VueTrack, {
   trackEvents,

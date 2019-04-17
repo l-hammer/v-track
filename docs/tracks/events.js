@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 17:10:31
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 21:52:45
+ * @Last Modified time: 2019-04-17 22:26:42
  */
 import trackAction from "./action";
 
@@ -105,6 +105,18 @@ export default {
     trackAction("18026", {
       source_page: name,
       rest: rest2
+    });
+  },
+  18027({ $route: { name } }) {
+    trackAction("18027", {
+      source_page: name,
+      description: "我想被曝光无数次"
+    });
+  },
+  18028({ $route: { name } }) {
+    trackAction("18028", {
+      source_page: name,
+      description: "我只想被曝光一次"
     });
   }
 };

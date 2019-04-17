@@ -230,7 +230,7 @@ export default {
 `;
 
 export default {
-  name: "Home",
+  name: "CustomEvents",
   components: {
     Button,
     CodeSnippet

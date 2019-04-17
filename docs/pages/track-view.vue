@@ -201,7 +201,7 @@ export default {
 `;
 
 export default {
-  name: "Home",
+  name: "TrackView",
   components: {
     CodeSnippet
   },
@@ -214,23 +214,12 @@ export default {
       jsTrackViewComponentWatchSnippet,
       trackViewComponentWatchDelaySnippet,
       jsTrackViewComponentWatchDelaySnippet,
-      item: {
-        id: Math.random()
-          .toString(36)
-          .substr(2)
-      },
-      activeName: "Feedback",
+      show: false,
       rest1: null,
-      rest2: null,
-      show: false
+      rest2: null
     };
   },
   methods: {
-    handleCustomEventWithParam(item, { target }) {
-      this.$message.success(
-        `自定义事件执行成功，参数为${JSON.stringify(item)}--${target}`
-      );
-    },
     async fetchRest(delay) {
       const response = await new Promise(resolve => {
         setTimeout(() => {
