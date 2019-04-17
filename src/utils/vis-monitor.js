@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-13 23:10:29
+ * @Last Modified time: 2019-04-17 22:56:13
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -28,6 +28,9 @@ export default class VisMonitor {
 
   init() {
     if (!this.started) {
+      const listener = debounce(this.visibilitychange.bind(this));
+
+      listener();
       this.removeScrollLisener = (listener => {
         if (this.ref) {
           return this.ref.$on("scroll", listener);
@@ -35,7 +38,7 @@ export default class VisMonitor {
           window.addEventListener("scroll", listener, false);
           return () => window.removeEventListener("scroll", listener, false);
         }
-      })(debounce(this.visibilitychange.bind(this)));
+      })(listener);
       this.started = true;
     }
   }
