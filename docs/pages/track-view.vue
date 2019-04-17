@@ -81,7 +81,7 @@
       >
       </el-alert>
       <div class="section-content">
-        <track-view v-track:18015.watch="{ rest1 }" />
+        <track-view v-track:18025.watch="{ rest1 }" />
         <div class="track-button" @click="fetchRest(false)">
           click me
         </div>
@@ -109,7 +109,7 @@
       >
       </el-alert>
       <div class="section-content">
-        <track-view v-track:18025.watch.delay="{ rest2, delay: 2000 }" />
+        <track-view v-track:18026.watch.delay="{ rest2, delay: 2000 }" />
         <div class="track-button" @click="fetchRest(true)">
           click me
         </div>

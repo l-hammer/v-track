@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 17:10:31
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 21:13:18
+ * @Last Modified time: 2019-04-17 21:52:45
  */
 import trackAction from "./action";
 
@@ -95,9 +95,16 @@ export default {
       source_page: name
     });
   },
-  18025({ $route: { name } }) {
+  18025({ rest1, $route: { name } }) {
     trackAction("18025", {
-      source_page: name
+      source_page: name,
+      rest: rest1
+    });
+  },
+  18026({ rest2, $route: { name } }) {
+    trackAction("18026", {
+      source_page: name,
+      rest: rest2
     });
   }
 };
