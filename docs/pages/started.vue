@@ -21,7 +21,10 @@
 
     <section class="snippets">
       <div class="section-content small">
-        完整示例可参考
+        v-track通过
+        <a href="https://cn.vuejs.org/v2/guide/custom-directive.html"
+          >Vue 自定义指令</a
+        >的方式将埋点代码与业务代码完全解耦，完整示例可参考
         <a href="https://github.com/l-hammer/v-track/tree/master">GitHub</a>
       </div>
     </section>

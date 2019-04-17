@@ -100,7 +100,7 @@
       ><el-alert
         center
         type="warning"
-        title="备注：修饰符 async 是基于 Vue 实例提供的 vm.$watch 方法，所以只有在返回结果 rest 发生变化时才会触发埋点"
+        title="备注：①修饰符 async 是基于 Vue 实例提供的 vm.$watch 方法，所以只有在返回结果 rest 发生变化时才会触发埋点；②当有多个参数时，.async会把最后一个参数当做监听对象"
         :closable="false"
       >
       </el-alert>
@@ -225,27 +225,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.close {
-  text-align: center;
-  margin-top: 12px;
-}
-.track-button {
-  width: 229px;
-  height: 39px;
-  background: $primary-color;
-  border-radius: 5px;
-  color: white;
-  line-height: 39px;
-  margin: auto;
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    background: lighten($primary-color, 5%);
-  }
-  &:active {
-    background: darken($primary-color, 5%);
-  }
-}
-</style>

@@ -278,27 +278,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.close {
-  text-align: center;
-  margin-top: 12px;
-}
-.track-button {
-  width: 229px;
-  height: 39px;
-  background: $primary-color;
-  border-radius: 5px;
-  color: white;
-  line-height: 39px;
-  margin: auto;
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    background: lighten($primary-color, 5%);
-  }
-  &:active {
-    background: darken($primary-color, 5%);
-  }
-}
-</style>

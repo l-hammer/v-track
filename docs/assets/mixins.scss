@@ -35,24 +35,9 @@
   flex-direction: column;
 }
 
-@mixin flex-control {
-  width: 0 !important;
-}
-
 @mixin box-center {
   align-items: center;
   justify-content: center;
-}
-
-@mixin toolbar-btn ($bg) {
-  background: fade($bg, 80%);
-  color: black;
-  transition: background 0.2s;
-
-  &:hover {
-    color: black;
-    background: $bg;
-  }
 }
 
 @mixin space-between-x($margin) {
