@@ -157,7 +157,7 @@ export default {
 }
 `;
 const trackClickAsyncSnippet = `
-<div class="track-button" v-track:18018.click.delay="handleClickAsync">click me</div>
+<div class="track-button" v-track:18018.click.async="handleClickAsync">click me</div>
 `;
 const jsTrackClickAsyncSnippet = `
 export default {
