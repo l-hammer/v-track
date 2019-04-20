@@ -1,5 +1,6 @@
 # v-track
 
+<a href="https://travis-ci.org/l-hammer/v-track"><img alt="Travis (.org) branch" src="https://img.shields.io/travis/l-hammer/v-track/master.svg?logoColor=%23666666&style=flat-square"></a>
 <a href="https://unpkg.com/v-track/dist/v-track.min.js"><img src="https://img.badgesize.io/https://unpkg.com/v-track/dist/v-track.min.js?compression=gzip&style=flat-square" alt="Gzip Size" /></a>
 <a href="https://www.npmjs.com/package/v-track"><img src="https://img.shields.io/npm/v/v-track.svg?colorB=brightgreen&style=flat-square"></a>
 <a href="https://github.com/l-hammer/v-track/tree/master/tests/unit"><img src="https://img.shields.io/badge/tested_with-jest-99424f.svg?style=flat-square"></a>
@@ -11,13 +12,13 @@ v-track通过 Vue [自定义指令](https://cn.vuejs.org/v2/guide/custom-directi
 
 ### NPM
 
-```bash
+```shell
 $ npm install v-track --save
 ```
 
 ### YARN
 
-```bash
+```shell
 $ yarn add v-track
 ```
 
