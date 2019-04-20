@@ -4,6 +4,11 @@
       <h1>v-track</h1>
       <div class="command">yarn add v-track or npm add v-track --save</div>
       <nav>
+        <a href="https://travis-ci.org/l-hammer/v-track"
+          ><img
+            alt="Travis (.org) branch"
+            src="https://img.shields.io/travis/l-hammer/v-track/master.svg?logoColor=%23666666&style=flat-square"
+        /></a>
         <a href="https://unpkg.com/v-track/dist/v-track.min.js"
           ><img
             src="http://img.badgesize.io/https://unpkg.com/v-track/dist/v-track.min.js?compression=gzip&style=flat-square"
