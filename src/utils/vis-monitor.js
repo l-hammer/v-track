@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 22:56:13
+ * @Last Modified time: 2019-04-20 18:34:33
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -14,12 +14,13 @@ import { isFun, debounce } from "./helper";
  * @desc 目标元素控制器
  */
 export default class VisMonitor {
-  constructor(ele, ref) {
+  constructor(ele, ref, refwin = window) {
     if (!isElement(ele)) {
       throw new Error("not an element node");
     }
     this.ele = ele;
     this.ref = ref;
+    this.refWin = refwin;
     this.started = false;
     this.listeners = {};
     this.removeScrollLisener = null;
@@ -35,12 +36,22 @@ export default class VisMonitor {
         if (this.ref) {
           return this.ref.$on("scroll", listener);
         } else {
-          window.addEventListener("scroll", listener, false);
-          return () => window.removeEventListener("scroll", listener, false);
+          this.refWin.addEventListener("scroll", listener, false);
+          return () =>
+            this.refWin.removeEventListener("scroll", listener, false);
         }
       })(listener);
       this.started = true;
     }
+  }
+
+  viewport() {
+    const win = this.refWin;
+
+    return {
+      height: win.innerHeight,
+      width: win.innerWidth
+    };
   }
 
   /**
@@ -102,10 +113,7 @@ export default class VisMonitor {
    */
   visibilitychange() {
     const rect = this.ele.getBoundingClientRect();
-    const view = {
-      height: window.innerHeight,
-      width: window.innerWidth
-    };
+    const view = this.viewport();
 
     if (!isInViewport(rect, view) || !isVisible(this.ele)) {
       return 0;
