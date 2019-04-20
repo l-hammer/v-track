@@ -1,0 +1,23 @@
+language: node_js
+
+cache:
+  yarn: true
+
+node_js:
+  - '10'
+  - '8'
+  - '6'
+
+branches:
+  only:
+    - master
+
+install:
+  - yarn
+
+script:
+  - yarn lint
+  - yarn test:unit
+
+after_success:
+  - yarn build
