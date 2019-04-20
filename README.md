@@ -21,6 +21,22 @@ $ npm install v-track --save
 $ yarn add v-track
 ```
 
+### CDN
+
+目前可以通过[unpkg.com/v-track](https://unpkg.com/v-track/)获取到最新版本的资源，在页面上使用 script 标签直接引入文件即可开始使用
+
+```html
+<script src="https://unpkg.com/v-track/dist/v-track.min.js"></script>
+```
+
+或者
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/v-track/dist/v-track.min.js"></script>
+```
+
+> 我们建议使用 CDN 引入 v-track 的用户在链接地址上锁定版本，以免将来 v-track 升级时受到非兼容性更新的影响。锁定版本的方法请查看 [unpkg.com](https://unpkg.com/) or [jsdelivr.com](https://www.jsdelivr.com/)。
+
 ## 用法
 
 ```js
