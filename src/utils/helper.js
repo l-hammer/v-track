@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 11:50:22
+ * @Last Modified time: 2019-04-20 18:06:43
  */
 
 /**
@@ -26,13 +26,6 @@ export const isUndef = v => v === undefined || v === null;
  * @param {*} v
  */
 export const isDef = v => v !== undefined && v !== null;
-
-/**
- * @desc 判断当前环境是否为生产环境
- *
- * @param {*} v
- */
-export const isProd = process.env.NODE_ENV === "production";
 
 /**
  * @desc 获取对象的键值

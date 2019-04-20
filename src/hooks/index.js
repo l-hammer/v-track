@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 21:30:29
+ * @Last Modified time: 2019-04-20 18:04:48
  */
 import {
   zipArray,
@@ -63,7 +63,7 @@ export function bind(
   __,
   events
 ) {
-  if (!events[id]) throw new Error("埋点参数不存在哇");
+  if (!events[id]) throw new Error("tracking event does not exist");
 
   let queue = [];
   let tck = events[id].bind(null, context);
@@ -182,7 +182,7 @@ export function bind(
       el[`$on_${eventName}`] = true; // 避免重复监听
     });
   } else {
-    throw new Error(`不支持${rawName}指令`);
+    throw new Error(`${rawName} directive is not supported`);
   }
 }
 
