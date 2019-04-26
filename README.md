@@ -36,19 +36,19 @@ $ yarn add v-track
 <script src="https://cdn.jsdelivr.net/npm/v-track/dist/v-track.min.js"></script>
 ```
 
-> 我们建议使用 CDN 引入 v-track 的用户在链接地址上锁定版本，以免将来 v-track 升级时受到非兼容性更新的影响。锁定版本的方法请查看 [unpkg.com](https://unpkg.com/) or [jsdelivr.com](https://www.jsdelivr.com/)。
+> 建议使用 CDN 引入 v-track 的用户在链接地址上锁定版本，以免将来 v-track 升级时受到非兼容性更新的影响。锁定版本的方法请查看 [unpkg.com](https://unpkg.com/) or [jsdelivr.com](https://www.jsdelivr.com/)。
 
 ## 用法
 
 ```js
 import Vue from "vue"
 import VTrack from "v-track"
-import trackEvents from "./tracks"
+import trackEvents from "./track-events"
 
 Vue.use(VTrack, {
   trackEvents, // 埋点事件对象
   trackEnable: {
-    UVPV: false, // 是否开启UVPV统计，默认为false
+    UVPV: true, // 是否开启UVPV统计，默认为false
     TONP: true // 是否开启页面停留时长统计，默认为false
   }
 })
