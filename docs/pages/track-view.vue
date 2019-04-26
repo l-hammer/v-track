@@ -160,14 +160,7 @@ export default {
         }, 300);
       });
   
-      if (this.rest === response.data) {
-        this.$message.success(
-          "异步事件返回成功，但返回结果和上一次相等，埋点不会上报"
-        );
-      } else {
-        this.$message.success("异步事件返回成功");
-        this.rest = response.data;
-      }
+      this.rest = response.data;
     }
   },
 }
@@ -187,14 +180,7 @@ export default {
         }, 300);
       });
   
-      if (this.rest === response.data) {
-        this.$message.success(
-          "异步事件返回成功，但返回结果和上一次相等，埋点不会上报"
-        );
-      } else {
-        this.$message.success("异步事件返回成功");
-        this.rest = response.data;
-      }
+      this.rest = response.data;
     }
   },
 }

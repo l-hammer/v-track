@@ -171,9 +171,9 @@ export default {
       const response = await new Promise(resolve => {
         setTimeout(() => {
           resolve({ data: "success" });
-          this.$message.success("异步事件返回成功");
         }, 300);
       });
+
       this.rest = response.data;
     }
   }
@@ -217,10 +217,17 @@ export default {
       const response = await new Promise(resolve => {
         setTimeout(() => {
           resolve({ data: "success" });
-          this.$message.success("异步事件返回成功");
         }, 300);
       });
-      this.rest = response.data;
+
+      if (this.rest === response.data) {
+        this.$message.success(
+          "异步事件返回成功，但返回结果和上一次相等，埋点不会上报"
+        );
+      } else {
+        this.rest = response.data;
+        this.$message.success("异步事件返回成功");
+      }
     }
   }
 };
