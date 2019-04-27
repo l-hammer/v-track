@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-15 23:01:48
+ * @Last Modified time: 2019-04-27 23:32:41
  */
 import * as hooks from "./hooks";
 
@@ -21,10 +21,11 @@ export default class VTrack {
       TONP: false,
       ...trackEnable
     };
-    const TRACK_TONP = entertime => {
+    const TRACK_TONP = et => {
       if (trackEnable.TONP) {
         trackEvents.TONP({
-          stt: `${(Date.now() - entertime) / 1e3}s`
+          et,
+          dt: Date.now()
         });
       }
     };
