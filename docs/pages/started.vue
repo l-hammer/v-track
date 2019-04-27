@@ -30,9 +30,11 @@
     </section>
 
     <section class="snippets">
-      <CodeSnippet class="snippet" :code="eventsSnippet" lang="js" />
+      <CodeSnippet class="snippet" :code="installSnippet" lang="shell" />
       <div class="plus">+</div>
       <CodeSnippet class="snippet" :code="mainSnippet" lang="js" />
+      <div class="plus">+</div>
+      <CodeSnippet class="snippet" :code="eventsSnippet" lang="js" />
       <div class="plus">+</div>
       <CodeSnippet class="snippet" :code="componentSnippet" lang="html" />
     </section>
@@ -42,8 +44,28 @@
 <script>
 import CodeSnippet from "../components/code-snippet";
 
+const installSnippet = `
+# YARN
+$ yarn add v-track
+
+# NPM
+$ npm install v-track --save
+`;
+const mainSnippet = `
+import Vue from "vue";
+import VTrack from "v-track";
+import trackEvents from "./track-events";
+
+Vue.use(VTrack, {
+  trackEvents, // 埋点事件对象
+  trackEnable: {
+    UVPV: false, // 是否开启UVPV统计，默认为false
+    TONP: true // 是否开启页面停留时长统计，默认为false
+  }
+})
+`;
 const eventsSnippet = `
-import trackAction from "./action";
+import trackAction from "./action"; // 自定义埋点上报的方法
 
 export default {
   /**
@@ -56,45 +78,33 @@ export default {
   /**
    * @name TONP 固定名称不支持修改
    * @desc 页面停留时间埋点（Time on Page）
-   * @param {String} stt 进入页面时长，单位为秒
+   * @param {Timestamp} et 进入页面时间
+   * @param {Timestamp} dt 离开页面时间
    */
-  TONP({ stt }) {
-    trackAction("2", { stt });
+  TONP({ et, dt }) {
+    trackAction("2", {
+      stt: dt - et
+    });
   },
   /**
-   * @desc 测试埋点
-   * @param {*} { $route: { name } }
-   * @param {*} { item: { id, level4Tag }, index }
+   * @param {Object} context 当前上下文
+   * @param {Object} item 事件参数
+   * @param {Object} event 事件对象
    */
-  19058(
+  18015(
     {
       $route: { name }
     },
-    {
-      item: { id },
-      index
-    }
+    { id },
+    { target }
   ) {
-    trackAction("19058", {
-      knowledge_id: id, // 知识ID
-      click_position: index + 1, // 点击位置
-      source_page: name // 页面来源
+    trackAction("18015", {
+      id,
+      source_page: name,
+      target
     });
-  }
+  },
 };
-`;
-const mainSnippet = `
-import Vue from "vue";
-import VTrack from "v-track";
-import trackEvents from "./tracks";
-
-Vue.use(VTrack, {
-  trackEvents, // 埋点事件对象
-  trackEnable: {
-    UVPV: false, // 是否开启UVPV统计，默认为false
-    TONP: true // 是否开启页面停留时长统计，默认为false
-  }
-})
 `;
 const componentSnippet = `
 <!-- 页面行为埋点（track-view为v-track全局注册的组件） -->
@@ -129,6 +139,7 @@ export default {
   },
   data() {
     return {
+      installSnippet,
       mainSnippet,
       eventsSnippet,
       componentSnippet

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 17:10:31
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-17 22:26:42
+ * @Last Modified time: 2019-04-27 23:13:43
  */
 import trackAction from "./action";
 
@@ -17,32 +17,36 @@ export default {
   /**
    * @name TONP 固定名称不支持修改
    * @desc 页面停留时间埋点（Time on Page）
-   * @param {String} stt 进入页面时长，单位为秒
+   * @param {Timestamp} et 进入页面时间
+   * @param {Timestamp} dt 离开页面时间
    */
-  TONP({ stt }) {
-    trackAction("2", { stt });
+  TONP({ et, dt }) {
+    trackAction("2", {
+      stt: `${(dt - et) / 1e3}s`
+    });
   },
   /**
    * @desc 测试埋点
-   * @param {*} { $route: { name } }
-   * @param {*} { item: { id, level4Tag }, index }
    */
   18015({ $route: { name } }) {
     trackAction("18015", {
       source_page: name // 页面来源
     });
   },
+  /**
+   * @param {Object} context 当前上下文
+   * @param {Object} item 事件参数
+   * @param {Object} event 事件对象
+   */
   18016(
     {
       $route: { name }
     },
-    {
-      item: { id }
-    },
+    { id },
     { target }
   ) {
     trackAction("18016", {
-      id, // 知识ID
+      id,
       source_page: name,
       target
     });
@@ -67,7 +71,7 @@ export default {
     { target }
   ) {
     trackAction("18019", {
-      id, // 知识ID
+      id,
       source_page: name,
       target
     });
