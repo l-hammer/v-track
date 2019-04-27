@@ -10,16 +10,16 @@ v-track通过 Vue [自定义指令](https://cn.vuejs.org/v2/guide/custom-directi
 
 ## 安装
 
-### NPM
-
-```shell
-$ npm install v-track --save
-```
-
 ### YARN
 
 ```shell
 $ yarn add v-track
+```
+
+### NPM
+
+```shell
+$ npm install v-track --save
 ```
 
 ### CDN
@@ -88,9 +88,9 @@ export default {
 ```HTML
 <!-- 页面行为埋点（track-view为v-track全局注册的组件） -->
 <track-view v-track:18015></track-view>
-<track-view v-track:18015.watch="{ result }"></track-view>
-<track-view v-track:18015.watch.delay="{ result }"></track-view>
-<track-view v-if="result" v-track:18015></track-view>
+<track-view v-track:18015.watch="{ rest }"></track-view>
+<track-view v-track:18015.watch.delay="{ rest }"></track-view>
+<track-view v-if="rest" v-track:18015></track-view>
 
 <!-- 事件行为埋点（DOM） -->
 <div v-track:18015.click="handleClick"></div>
