@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-20 18:04:48
+ * @Last Modified time: 2019-04-27 22:51:25
  */
 import {
   zipArray,
@@ -128,13 +128,9 @@ export function bind(
         const [args, keys] = zipArray(value);
         const fn = args.shift();
         const exp = [...keys].pop();
-        const tck_args = keys
-          .slice(1)
-          .reduce((state, k) => ((state[k] = value[k]), state), {});
 
         debug.checkFun(fn);
-
-        tck = events[id].bind(null, context, tck_args);
+        tck = events[id].bind(null, context, ...args);
         queue = [tck, fn.bind(null, ...args)];
         modifiers.delay && queue.reverse();
         modifiers.async && watcher(exp, queue.shift());
