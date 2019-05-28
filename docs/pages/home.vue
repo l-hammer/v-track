@@ -19,6 +19,7 @@
       <a href="https://github.com/l-hammer/v-track/issues">打开一个 issue</a>
     </section>
 
+    <!----------------------- DEMO 1 ------------------------>
     <section class="demo">
       <el-alert
         center
@@ -38,11 +39,34 @@
       <CodeSnippet class="snippet" lang="html" :code="trackClickSnippet" />
     </section>
 
+    <!----------------------- DEMO 2 ------------------------>
     <section class="demo">
       <el-alert
         center
         type="info"
-        title="这个一个带参数点击事件行为的埋点，默认最后一个参数为event事件对象"
+        title="通过增加 .native 修饰符，我们可以监听组件原生click事件行为的埋点"
+        :closable="false"
+      >
+      </el-alert>
+      <div class="section-content">
+        <Button v-track:18015.click.native="handleNativeEvent"></Button>
+      </div>
+    </section>
+
+    <section class="snippets">
+      <CodeSnippet
+        class="snippet"
+        lang="html"
+        :code="trackNativeClickSnippet"
+      />
+    </section>
+
+    <!----------------------- DEMO 3 ------------------------>
+    <section class="demo">
+      <el-alert
+        center
+        type="info"
+        title="这个一个带参数点击事件行为的埋点，默认最后一个参数为 event 事件对象"
         :closable="false"
       >
       </el-alert>
@@ -69,6 +93,7 @@
       />
     </section>
 
+    <!----------------------- DEMO 4 ------------------------>
     <section class="demo">
       <el-alert
         center
@@ -89,18 +114,19 @@
       <CodeSnippet class="snippet" lang="js" :code="jsTrackClickDelaySnippet" />
     </section>
 
+    <!----------------------- DEMO 5 ------------------------>
     <section class="demo">
       <el-alert
         center
         type="info"
-        title="这是一个有异步行为的事件埋点，如示例所示：rest初始值为null，点击事件会fetch为success，所以埋点获取到的rest值应该为success"
+        title="这是一个有异步行为的事件埋点，如示例所示：rest 初始值为 null，点击事件会 fetch 为 success，所以埋点获取到的 rest 值应该为 success"
         :closable="false"
       >
       </el-alert
       ><el-alert
         center
         type="warning"
-        title="备注：①修饰符 async 是基于 Vue 实例提供的 vm.$watch 方法，所以只有在返回结果 rest 发生变化时才会触发埋点；②当有多个参数时，.async会把最后一个参数当做监听对象"
+        title="备注：①修饰符 async 是基于 Vue 实例提供的 vm.$watch 方法，所以只有在返回结果 rest 发生变化时才会触发埋点；②当有多个参数时，.async 会把最后一个参数当做监听对象"
         :closable="false"
       >
       </el-alert>
@@ -123,9 +149,13 @@
 
 <script>
 import CodeSnippet from "../components/code-snippet";
+import Button from "../components/button";
 
 const trackClickSnippet = `
 <div class="track-button" v-track:18015.click="handleClick">click me</div>
+`;
+const trackNativeClickSnippet = `
+<Button v-track:18015.click.native="handleNativeEvent"></Button>
 `;
 const trackClickWithParamSnippet = `
 <div class="track-button" v-track:18016.click="{ handleClickWithParam, item }">click me</div>
@@ -140,7 +170,7 @@ export default {
 }
 `;
 const trackClickDelaySnippet = `
-<div class="track-button" v-track:18017.click.delay="handleClickWithParam">click me</div>
+<div class="track-button" v-track:18017.click.delay="handleClickDelay">click me</div>
 `;
 const jsTrackClickDelaySnippet = `
 export default {
@@ -183,11 +213,13 @@ export default {
 export default {
   name: "Home",
   components: {
+    Button,
     CodeSnippet
   },
   data() {
     return {
       trackClickSnippet,
+      trackNativeClickSnippet,
       trackClickWithParamSnippet,
       jsTrackClickWithParamSnippet,
       trackClickDelaySnippet,
@@ -204,6 +236,9 @@ export default {
   methods: {
     handleClick() {
       this.$message.success("事件执行成功");
+    },
+    handleNativeEvent() {
+      this.$message.success("组件原生事件执行成功");
     },
     handleClickWithParam(item, { target }) {
       this.$message.success(

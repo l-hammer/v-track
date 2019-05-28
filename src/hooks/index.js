@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-27 22:51:25
+ * @Last Modified time: 2019-05-28 17:05:58
  */
 import {
   zipArray,
@@ -117,7 +117,10 @@ export function bind(
       (once ? vm.$once : vm.$on).call(vm, "fullyvisible", fn);
       el.$visMonitor = vm;
     }
-  } else if (!componentInstance && modifiers.click) {
+  } else if (
+    (!componentInstance && modifiers.click) ||
+    (componentInstance && partialMatch("native"))
+  ) {
     /**
      * @desc DOM元素事件行为埋点(需区分是否带参数)
      * @var {Function} fn 获取第一个参数作为回调函数
