@@ -19,6 +19,7 @@
       <a href="https://github.com/l-hammer/v-track/issues">打开一个 issue</a>
     </section>
 
+    <!----------------------- DEMO 1 ------------------------>
     <section class="demo">
       <el-alert
         center
@@ -41,6 +42,7 @@
       />
     </section>
 
+    <!----------------------- DEMO 2 ------------------------>
     <section class="demo">
       <el-alert
         center
@@ -69,6 +71,7 @@
       />
     </section>
 
+    <!----------------------- DEMO 3 ------------------------>
     <section class="demo">
       <el-alert
         center
@@ -123,6 +126,7 @@
       />
     </section>
 
+    <!----------------------- DEMO 4 ------------------------>
     <section class="demo">
       <el-alert
         center
