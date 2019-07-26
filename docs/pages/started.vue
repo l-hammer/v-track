@@ -59,7 +59,7 @@ import trackEvents from "./track-events";
 Vue.use(VTrack, {
   trackEvents, // 埋点事件对象
   trackEnable: {
-    UVPV: false, // 是否开启UVPV统计，默认为false
+    UVPV: true, // 是否开启UVPV统计，默认为false
     TONP: true // 是否开启页面停留时长统计，默认为false
   }
 })
@@ -71,17 +71,19 @@ export default {
   /**
    * @name UVPV 固定名称不支持修改
    * @desc UV、PV埋点
+   * @param {Object} context 当前上下文
    */
-  UVPV() {
+  UVPV(_) {
     trackAction("1");
   },
   /**
    * @name TONP 固定名称不支持修改
    * @desc 页面停留时间埋点（Time on Page）
+   * @param {Object} context 当前上下文
    * @param {Timestamp} et 进入页面时间
    * @param {Timestamp} dt 离开页面时间
    */
-  TONP({ et, dt }) {
+  TONP(_, { et, dt }) {
     trackAction("2", {
       stt: dt - et
     });
