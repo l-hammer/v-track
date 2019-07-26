@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-27 23:32:41
+ * @Last Modified time: 2019-07-26 11:28:45
  */
 import * as hooks from "./hooks";
 
@@ -21,9 +21,9 @@ export default class VTrack {
       TONP: false,
       ...trackEnable
     };
-    const TRACK_TONP = et => {
+    const TRACK_TONP = (ctx, et) => {
       if (trackEnable.TONP) {
-        trackEvents.TONP({
+        trackEvents.TONP(ctx, {
           et,
           dt: Date.now()
         });
@@ -54,7 +54,7 @@ export default class VTrack {
         PAGE_ENTER_TIME: Date.now()
       }),
       created() {
-        window.onbeforeunload = () => TRACK_TONP(this.PAGE_ENTER_TIME);
+        window.onbeforeunload = () => TRACK_TONP(this, this.PAGE_ENTER_TIME);
       },
       // 统计UV、PV
       beforeRouteEnter(to, _, next) {
@@ -63,13 +63,14 @@ export default class VTrack {
           next();
         } else {
           self.curPage = to.name;
-          trackEnable.UVPV && trackEvents.UVPV();
-          next();
+          next(vm => {
+            trackEnable.UVPV && trackEvents.UVPV(vm);
+          });
         }
       },
       // 页面停留时间
       beforeRouteLeave(_, __, next) {
-        TRACK_TONP(this.PAGE_ENTER_TIME);
+        TRACK_TONP(this, this.PAGE_ENTER_TIME);
         next();
       }
     });
