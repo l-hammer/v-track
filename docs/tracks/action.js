@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-14 16:44:42
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-16 11:28:36
+ * @Last Modified time: 2019-07-30 20:17:13
  */
 import { Notification, Message } from "element-ui";
 import { format } from "../utils/date";
@@ -32,7 +32,6 @@ export default function trackAction(evt, addtional = {}) {
     dangerouslyUseHTMLString: true,
     message: createFragment(data),
     customClass: "notification__large",
-    position: evt === "1" || evt === "2" ? "top-left" : "top-right",
-    offset: evt === "2" ? 198 : 0
+    position: evt === "1" || evt === "2" ? "top-left" : "top-right"
   });
 }

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-07-26 11:28:45
+ * @Last Modified time: 2019-07-30 20:15:53
  */
 import * as hooks from "./hooks";
 
@@ -59,10 +59,10 @@ export default class VTrack {
       // 统计UV、PV
       beforeRouteEnter(to, _, next) {
         // 防止有些情况该守卫执行多次导致重复埋点的问题
-        if (to.name === self.curPage) {
+        if (to.fullPath === self.curPage) {
           next();
         } else {
-          self.curPage = to.name;
+          self.curPage = to.fullPath;
           next(vm => {
             trackEnable.UVPV && trackEvents.UVPV(vm);
           });
