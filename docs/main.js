@@ -25,7 +25,7 @@ Vue.use(CollapseItem);
 Vue.use(VueTrack, {
   trackEvents,
   trackEnable: {
-    UVPV: true,
+    UVPV: "routeUpdate",
     TONP: true
   }
 });
