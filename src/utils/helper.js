@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-20 18:06:43
+ * @Last Modified time: 2019-08-05 15:31:00
  */
 
 /**
@@ -33,7 +33,7 @@ export const isDef = v => v !== undefined && v !== null;
  * @param {Object} value
  * @returns {Array} [keys, values]
  */
-export function zipArray(value) {
+export function zipArray(value = {}) {
   return [Object.values(value), Object.keys(value)];
 }
 

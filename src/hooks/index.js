@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-05-28 17:05:58
+ * @Last Modified time: 2019-08-05 17:43:57
  */
 import {
   zipArray,
@@ -107,14 +107,15 @@ export function bind(
   }
   // 区域曝光埋点
   else if (partialMatch("show")) {
-    const fn = () => events[id](context);
+    const [args] = zipArray(value);
+    const tck = events[id].bind(null, context, ...args);
     const once = partialMatch("once");
     const custom = partialMatch("custom");
 
     if (!el.$visMonitor) {
       const vm = new VisMonitor(el, custom && context.$refs[value.ref]);
 
-      (once ? vm.$once : vm.$on).call(vm, "fullyvisible", fn);
+      (once ? vm.$once : vm.$on).call(vm, "fullyvisible", tck);
       el.$visMonitor = vm;
     }
   } else if (
