@@ -53,7 +53,10 @@ const router = new VueRouter({
     {
       path: "/track-view",
       name: "TRACK_VIEW",
-      component: TrackView
+      component: TrackView,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: "/block-show",
