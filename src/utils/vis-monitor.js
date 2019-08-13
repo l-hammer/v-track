@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-20 18:34:33
+ * @Last Modified time: 2019-08-13 12:14:37
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -22,6 +22,7 @@ export default class VisMonitor {
     this.ref = ref;
     this.refWin = refwin;
     this.started = false;
+    this.prevPerc = null; // 保存前一次曝光百分比
     this.listeners = {};
     this.removeScrollLisener = null;
     this.init();
@@ -116,6 +117,7 @@ export default class VisMonitor {
     const view = this.viewport();
 
     if (!isInViewport(rect, view) || !isVisible(this.ele)) {
+      this.prevPerc = 0;
       return 0;
     }
 
@@ -134,7 +136,10 @@ export default class VisMonitor {
       vw = Math.min(view.width, rect.right);
     }
     perc = (vh * vw) / (rect.height * rect.width);
-    if (perc === 1) this.$emit("fullyvisible");
+    if (this.prevPerc !== 1 && perc === 1) {
+      this.$emit("fullyvisible");
+      this.prevPerc = perc;
+    }
   }
 
   /**
