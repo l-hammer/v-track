@@ -31,7 +31,7 @@
         /></a>
       </nav>
       <div class="description">
-        🕹一个基于Vue指令实现的埋点插件~
+        🕹A tracking Plugin Based on Vue Instruction~~
       </div>
     </header>
 
