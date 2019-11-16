@@ -22,10 +22,10 @@
           ><img
             src="https://img.shields.io/badge/tested_with-jest-99424f.svg?style=flat-square"
         /></a>
-        <a href="http://hits.dwyl.io/l-hammer/v-track" alt="hit count"
+        <a href="javascript:void(0);" alt="hit count"
           ><img src="http://hits.dwyl.io/l-hammer/v-track.svg"
         /></a>
-        <a href="http://hits.dwyl.io/l-hammer/v-track" alt="downloads"
+        <a href="javascript:void(0);" alt="downloads"
           ><img
             src="https://img.shields.io/npm/dt/v-track.svg?style=flat-square"
         /></a>
