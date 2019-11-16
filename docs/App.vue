@@ -25,6 +25,10 @@
         <a href="http://hits.dwyl.io/l-hammer/v-track" alt="hit count"
           ><img src="http://hits.dwyl.io/l-hammer/v-track.svg"
         /></a>
+        <a href="http://hits.dwyl.io/l-hammer/v-track" alt="downloads"
+          ><img
+            src="https://img.shields.io/npm/dt/v-track.svg?style=flat-square"
+        /></a>
         <a href="https://github.com/l-hammer/v-track"
           ><img
             src="https://img.shields.io/github/stars/l-hammer/v-track.svg?style=social&label=Star"
