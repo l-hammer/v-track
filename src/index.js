@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-07-31 10:56:51
+ * @Last Modified time: 2020-01-13 14:38:02
  */
 import * as hooks from "./hooks";
 
@@ -61,9 +61,12 @@ export default class VTrack {
         });
       },
       beforeRouteUpdate(_, __, next) {
-        if (trackEnable.UVPV && trackEnable.UVPV === "routeUpdate") {
-          trackEvents.UVPV(this);
-        }
+        // 确保导航升级完成
+        this.$watch("$route", () => {
+          if (trackEnable.UVPV && trackEnable.UVPV === "routeUpdate") {
+            trackEvents.UVPV(this);
+          }
+        });
         next();
       },
       // 页面停留时间
