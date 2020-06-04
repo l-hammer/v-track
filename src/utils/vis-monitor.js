@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2020-06-04 13:56:14
+ * @Last Modified time: 2020-06-04 20:15:46
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -48,10 +48,15 @@ export default class VisMonitor {
 
   viewport() {
     const win = this.refWin;
+    const rect = isElement(win) ? win.getBoundingClientRect() : win;
 
     return {
-      height: win.innerHeight,
-      width: win.innerWidth
+      top: isElement(win) ? rect.top : 0,
+      right: rect.right || rect.innerWidth,
+      bottom: rect.bottom || rect.innerHeight,
+      left: rect.left || 0,
+      height: win.innerHeight || win.offsetHeight,
+      width: win.innerWidth || win.offsetWidth
     };
   }
 
@@ -125,17 +130,24 @@ export default class VisMonitor {
     let vw = 0;
     let perc = 0;
 
-    if (rect.top >= 0) {
-      vh = Math.min(rect.height, view.height - rect.top);
-    } else if (rect.bottom > 0) {
-      vh = Math.min(view.height, rect.bottom);
+    if (rect.top >= view.top && rect.bottom > view.bottom) {
+      vh = view.bottom - rect.top;
+    } else if (rect.top < view.top && rect.bottom <= view.bottom) {
+      vh = rect.bottom - view.top;
+    } else {
+      vh = rect.height;
     }
-    if (rect.left >= 0) {
-      vw = Math.min(rect.width, view.width - rect.left);
-    } else if (rect.right > 0) {
-      vw = Math.min(view.width, rect.right);
+
+    if (rect.left >= view.left && rect.right > view.right) {
+      vw = view.right - rect.left;
+    } else if (rect.left < view.left && rect.right <= view.right) {
+      vw = rect.right - view.left;
+    } else {
+      vw = rect.width;
     }
+
     perc = (vh * vw) / (rect.height * rect.width);
+
     if (this.prevPerc !== 1 && perc === 1) {
       this.$emit("fullyvisible");
       this.prevPerc = perc;

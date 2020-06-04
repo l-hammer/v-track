@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-04-08 11:59:30
+ * @Last Modified time: 2020-06-04 17:08:44
  */
 
 /**
@@ -33,11 +33,18 @@ export function isInViewport(rect, viewport) {
   if (!rect || (rect.width <= 0 || rect.height <= 0)) {
     return false;
   }
+
   return (
     rect.bottom > 0 &&
     rect.right > 0 &&
-    rect.top < viewport.height &&
-    rect.left < viewport.width
+    rect.top < window.innerHeight &&
+    rect.left < window.innerWidth &&
+    !(
+      rect.left > viewport.right ||
+      rect.top > viewport.bottom ||
+      rect.right < viewport.left ||
+      rect.bottom < viewport.top
+    )
   );
 }
 

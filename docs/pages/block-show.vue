@@ -64,6 +64,29 @@
         :code="trackViewComponentSnippet"
       />
     </section>
+
+    <!----------------------- DEMO 3 ------------------------>
+    <section ref="viewport" class="demo viewport">
+      <el-alert
+        center
+        type="info"
+        title="某个区域内元素曝光埋点"
+        :closable="false"
+      >
+      </el-alert>
+      <div class="section-content large">
+        <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport' }">
+          我也想被曝光无数次
+        </el-card>
+      </div>
+    </section>
+    <section class="snippets">
+      <CodeSnippet
+        class="snippet"
+        lang="html"
+        :code="viewportTrackViewComponentSnippet"
+      />
+    </section>
   </div>
 </template>
 
@@ -76,6 +99,11 @@ const trackViewComponentSnippet = `
 const trackViewComponentOnceSnippet = `
 <el-card shadow="always" v-track:18027.show.once>我只想被曝光一次</el-card>
 `;
+const viewportTrackViewComponentSnippet = `
+<section ref="viewport">
+  <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport' }">我也想被曝光无数次</el-card>
+</section>
+`;
 
 export default {
   name: "BlockShow",
@@ -86,6 +114,7 @@ export default {
     return {
       trackViewComponentSnippet,
       trackViewComponentOnceSnippet,
+      viewportTrackViewComponentSnippet,
       show: false,
       rest1: null,
       rest2: null

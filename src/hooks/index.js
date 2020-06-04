@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2020-06-04 13:57:24
+ * @Last Modified time: 2020-06-04 20:15:02
  */
 import {
   zipArray,
@@ -113,14 +113,16 @@ export function bind(
     const custom = partialMatch("custom");
 
     if (!el.$visMonitor) {
-      const vm = new VisMonitor(
-        el,
-        custom && context.$refs[value.ref],
-        value && value.refWin
-      );
+      setTimeout(() => {
+        const vm = new VisMonitor(
+          el,
+          custom && context.$refs[value.ref],
+          value && context.$refs[value.viewport]
+        );
 
-      (once ? vm.$once : vm.$on).call(vm, "fullyvisible", tck);
-      el.$visMonitor = vm;
+        (once ? vm.$once : vm.$on).call(vm, "fullyvisible", tck);
+        el.$visMonitor = vm;
+      }, 0);
     }
   } else if (
     (!componentInstance && modifiers.click) ||
