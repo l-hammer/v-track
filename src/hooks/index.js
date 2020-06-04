@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2019-08-05 17:43:57
+ * @Last Modified time: 2020-06-04 13:57:24
  */
 import {
   zipArray,
@@ -113,7 +113,11 @@ export function bind(
     const custom = partialMatch("custom");
 
     if (!el.$visMonitor) {
-      const vm = new VisMonitor(el, custom && context.$refs[value.ref]);
+      const vm = new VisMonitor(
+        el,
+        custom && context.$refs[value.ref],
+        value && value.refWin
+      );
 
       (once ? vm.$once : vm.$on).call(vm, "fullyvisible", tck);
       el.$visMonitor = vm;
