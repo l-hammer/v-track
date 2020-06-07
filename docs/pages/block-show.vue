@@ -66,7 +66,7 @@
     </section>
 
     <!----------------------- DEMO 3 ------------------------>
-    <section ref="viewport" class="demo viewport">
+    <section ref="viewport1" class="demo viewport">
       <el-alert
         center
         type="info"
@@ -75,7 +75,7 @@
       >
       </el-alert>
       <div class="section-content large">
-        <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport' }">
+        <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport1' }">
           我也想被曝光无数次
         </el-card>
       </div>
@@ -84,7 +84,33 @@
       <CodeSnippet
         class="snippet"
         lang="html"
-        :code="viewportTrackViewComponentSnippet"
+        :code="viewportTrackViewComponentSnippet1"
+      />
+    </section>
+
+    <!----------------------- DEMO 4 ------------------------>
+    <section ref="viewport2" class="demo viewport">
+      <el-alert
+        center
+        type="info"
+        title="某个区域内元素曝光超过一半则上报埋点"
+        :closable="false"
+      >
+      </el-alert>
+      <div class="section-content large">
+        <el-card
+          shadow="always"
+          v-track:18030.show="{ viewport: 'viewport2', percent: 0.5 }"
+        >
+          我也想被曝光无数次
+        </el-card>
+      </div>
+    </section>
+    <section class="snippets">
+      <CodeSnippet
+        class="snippet"
+        lang="html"
+        :code="viewportTrackViewComponentSnippet2"
       />
     </section>
   </div>
@@ -99,9 +125,14 @@ const trackViewComponentSnippet = `
 const trackViewComponentOnceSnippet = `
 <el-card shadow="always" v-track:18027.show.once>我只想被曝光一次</el-card>
 `;
-const viewportTrackViewComponentSnippet = `
+const viewportTrackViewComponentSnippet1 = `
 <section ref="viewport">
-  <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport' }">我也想被曝光无数次</el-card>
+  <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport1' }">我也想被曝光无数次</el-card>
+</section>
+`;
+const viewportTrackViewComponentSnippet2 = `
+<section ref="viewport">
+  <el-card shadow="always" v-track:18029.show="{ viewport: 'viewport2', percent: 0.5 }">我也想被曝光无数次</el-card>
 </section>
 `;
 
@@ -114,7 +145,8 @@ export default {
     return {
       trackViewComponentSnippet,
       trackViewComponentOnceSnippet,
-      viewportTrackViewComponentSnippet,
+      viewportTrackViewComponentSnippet1,
+      viewportTrackViewComponentSnippet2,
       show: false,
       rest1: null,
       rest2: null

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-03-06 17:49:29
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2020-06-04 20:15:02
+ * @Last Modified time: 2020-06-05 20:23:06
  */
 import {
   zipArray,
@@ -117,7 +117,8 @@ export function bind(
         const vm = new VisMonitor(
           el,
           custom && context.$refs[value.ref],
-          value && context.$refs[value.viewport]
+          value && context.$refs[value.viewport],
+          value && value.percent
         );
 
         (once ? vm.$once : vm.$on).call(vm, "fullyvisible", tck);

@@ -2,7 +2,7 @@
  * @Author: 宋慧武
  * @Date: 2019-04-08 11:13:34
  * @Last Modified by: 宋慧武
- * @Last Modified time: 2020-06-04 20:15:46
+ * @Last Modified time: 2020-06-07 10:47:44
  */
 import { isElement, isVisible, isInViewport } from "./dom";
 import { isFun, debounce } from "./helper";
@@ -14,14 +14,18 @@ import { isFun, debounce } from "./helper";
  * @desc 目标元素控制器
  */
 export default class VisMonitor {
-  constructor(ele, ref, refwin = window) {
+  constructor(ele, ref, refwin = window, percent = 1) {
     if (!isElement(ele)) {
       throw new Error("not an element node");
+    }
+    if (percent > 1 && percent <= 0) {
+      throw new Error("'percent' must be a number between 0 and 1");
     }
     this.ele = ele;
     this.ref = ref;
     this.refWin = refwin;
     this.started = false;
+    this.percent = percent;
     this.prevPerc = null; // 保存前一次曝光百分比
     this.listeners = {};
     this.removeScrollLisener = null;
@@ -130,6 +134,22 @@ export default class VisMonitor {
     let vw = 0;
     let perc = 0;
 
+    if (view.top < 0) {
+      view.top = 0;
+    }
+
+    if (view.bottom > window.innerHeight) {
+      view.bottom = window.innerHeight;
+    }
+
+    if (view.left < 0) {
+      view.left = 0;
+    }
+
+    if (view.right > window.innerWidth) {
+      view.right = window.innerWidth;
+    }
+
     if (rect.top >= view.top && rect.bottom > view.bottom) {
       vh = view.bottom - rect.top;
     } else if (rect.top < view.top && rect.bottom <= view.bottom) {
@@ -148,7 +168,7 @@ export default class VisMonitor {
 
     perc = (vh * vw) / (rect.height * rect.width);
 
-    if (this.prevPerc !== 1 && perc === 1) {
+    if (this.prevPerc < this.percent && perc >= this.percent) {
       this.$emit("fullyvisible");
       this.prevPerc = perc;
     }
